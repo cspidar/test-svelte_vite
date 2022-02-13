@@ -13,18 +13,39 @@ const readText = function (path) {
 text = readText("./asset/Avengers_Endgame.srt");
 
 let arr = [];
+arr = text.split("\r\n");
 
-// while (text.length > 0) {
-//   arr.push(text.split("\n"));
-// }
-arr = text.split("\n");
+let rarr = [];
+
+let tempText = "";
+
+for (let i = 0; i < arr.length; i++) {
+  let word = {};
+  let example = [];
+  if (arr[i].includes("-->")) {
+    word.time = arr[i].replace("-->", "-").replaceAll(/,.../g, "");
+    // tempText += arr[i].replace("-->", "-").replaceAll(/,.../g, ""); // 텍스트 파일 생성
+    // tempText += "\r\n"; // 텍스트 파일 생성
+    i++;
+    while (arr[i] !== "") {
+      example.push(arr[i]);
+      tempText += arr[i] += "\r\n"; // 텍스트
+      i++;
+    }
+    word.example = example;
+    tempText += "\r\n"; // 텍스트
+    rarr.push(word);
+    word = {};
+  }
+}
+
+// console.log(tempText);
+
 // arr = arr.filter((t) => t !== "");
 
-console.log(arr);
+writeFileSync("./asset/en.txt", tempText, "utf-8");
 
 // let text = readText("./asset/Avengers_Endgame.srt");
-
-// writeFileSync("./asset/text.txt", text, "utf-8");
 
 // appendFileSync("./asset/word.txt", text, "utf-8");
 

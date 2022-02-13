@@ -2,13 +2,21 @@ export const removeFromList = (list, item) => list.filter((t) => t !== item);
 export const addToList = (list, item) => [item, ...list];
 
 export let ori_items = [
-  { word: "apple", mean: "🍎 사과", example: "Apple will make i phone 30." },
+  {
+    word: "apple",
+    mean: "🍎 사과",
+    example: "Apple will make i phone 31.",
+  },
   {
     word: "Pineapple",
     mean: "🍍 파인애플",
     example: "Pineapple is not fine.",
   },
-  { word: "Banana", mean: "🍌 바나나", example: "Banana is delicious" },
+  {
+    word: "Banana",
+    mean: "🍌 바나나",
+    example: "Banana is delicious",
+  },
   { word: "LEMMON", mean: "🍋 레몬", example: "Lemon with vodka" },
   {
     word: "orange",
@@ -26,7 +34,11 @@ export let ori_items = [
     mean: "🍍 파인애플",
     example: "Pineapple is not fine.",
   },
-  { word: "Banana", mean: "🍌 바나나", example: "Banana is delicious" },
+  {
+    word: "Banana",
+    mean: "🍌 바나나",
+    example: "Banana is delicious",
+  },
   { word: "LEMMON", mean: "🍋 레몬", example: "Lemon with vodka" },
   {
     word: "orange",
@@ -44,7 +56,11 @@ export let ori_items = [
     mean: "🍍 파인애플",
     example: "Pineapple is not fine.",
   },
-  { word: "Banana", mean: "🍌 바나나", example: "Banana is delicious" },
+  {
+    word: "Banana",
+    mean: "🍌 바나나",
+    example: "Banana is delicious",
+  },
   { word: "LEMMON", mean: "🍋 레몬", example: "Lemon with vodka" },
   {
     word: "orange",

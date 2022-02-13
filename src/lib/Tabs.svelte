@@ -1,6 +1,7 @@
 <script>
   import { quintOut } from "svelte/easing";
-  import { fly, fade, slide } from "svelte/transition";
+  import { fly, fade, slide, crossfade } from "svelte/transition";
+  import { flip } from "svelte/animate";
   import Tab1 from "./Tab1.svelte";
   import Tab2 from "./Tab2.svelte";
   import Tab3 from "./Tab3.svelte";
@@ -48,6 +49,7 @@
     items = ori_items;
     knows = [];
     yets = [];
+    refreshList();
   }
 
   $: localStorage.setItem("items", JSON.stringify(items));
@@ -73,13 +75,14 @@
 <div class="topTabs w-screen fixed top-0 left-0 right-0 z-50 backdrop-blur">
   <ul class="justify-center mt-2 text-l text-slate-700">
     <button
-      class="mr-2 hover:scale-90 active:scale-90 active:-rotate-180 transition-all"
+      class="mr-2 hover:scale-90 active:scale-90 active:-rotate-180 transition-all ease-in-out duration-300"
+      on:click={refreshList}
       on:click={resetList}
       ><svg
         xmlns="http://www.w3.org/2000/svg"
-        class="inline h-6 w-6"
+        class="inline-block h-6 w-6"
         fill="none"
-        viewBox="2 2 24 24"
+        viewBox="0 0 24 24"
         stroke="currentColor"
       >
         <path
@@ -88,11 +91,15 @@
           stroke-width="2"
           d={refresh}
         />
-      </svg></button
-    >
+      </svg>
+    </button>
     {#each tabs as tab}
       <li class={activeTabValue === tab.value ? "active" : ""}>
-        <span class="tabs" on:click={handleClick(tab.value)}>
+        <span
+          class="tabs"
+          on:click={handleClick(tab.value)}
+          on:click={refreshList}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="inline h-6 w-6"
@@ -135,11 +142,16 @@
               easing: quintOut,
             }}
       >
-        <div class="grid md:grids-cols-2 lg:grid-cols-3 gap-4 mb-2 break-words">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-2 break-words">
           <!-- Tab1 -->
           {#if tab.value === 1}
-            {#each items as item, i}
-              <div class="flex" in:fade>
+            {#each items as item, i (item)}
+              <div
+                class="flex"
+                animate:flip={{ duration: 300 }}
+                in:fade|local={{ duration: 100 }}
+                out:fly|local={{ x: 100 }}
+              >
                 <button
                   class="{btnStyle} 
                 {wordStatus[i] ? 'w-3/5' : 'w-2/5'} 
@@ -246,8 +258,13 @@
 
           <!-- Tab2 -->
           {#if tab.value === 2}
-            {#each yets as yet, i}
-              <div class={btnStyle}>
+            {#each yets as yet, i (yet)}
+              <div
+                class={btnStyle}
+                animate:flip={{ duration: 200 }}
+                in:fade|local={{ duration: 100 }}
+                out:fly|local={{ x: 100 }}
+              >
                 <p class="text-xl mb-1">{yet.word}</p>
                 <hr />
                 <p class="text-lg mt-2">{yet.mean}</p>
@@ -258,8 +275,13 @@
 
           <!-- Tab3 -->
           {#if tab.value === 3}
-            {#each knows as know, i}
-              <div class={btnStyle}>
+            {#each knows as know, i (know)}
+              <div
+                class={btnStyle}
+                animate:flip={{ duration: 200 }}
+                in:fade|local={{ duration: 100 }}
+                out:fly|local={{ x: 100 }}
+              >
                 <p class="text-xl mb-1">{know.word}</p>
                 <hr />
                 <p class="text-lg mt-2">{know.mean}</p>

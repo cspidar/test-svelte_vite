@@ -1,8 +1,6 @@
 import { appendFileSync, writeFile, readFileSync, writeFileSync } from "fs";
 // import fetch from "sync-fetch";
 import fetch from "node-fetch";
-import { inspect } from "unist-util-inspect";
-import { ParseEnglish } from "parse-english";
 
 let text;
 const readText = function (path) {
@@ -42,11 +40,6 @@ for (let i = 0; i < arr.length; i++) {
 }
 
 // console.log(tempText);
-
-let tree = new ParseEnglish().parse(tempText);
-
-// console.log(inspect(tree.ParagraphNode));
-// console.log(tree.children[0]);
 
 // arr = arr.filter((t) => t !== "");
 

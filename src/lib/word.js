@@ -1,7 +1,11 @@
 import { appendFileSync, writeFile, readFileSync, writeFileSync } from "fs";
+import voca from "voca";
 // import fetch from "sync-fetch";
 import fetch from "node-fetch";
 
+//
+
+// 텍스트 로드
 let text;
 const readText = function (path) {
   try {
@@ -12,38 +16,74 @@ const readText = function (path) {
 };
 text = readText("./asset/Avengers_Endgame.srt");
 
+//
+
+// 객체 생성
 let arr = [];
 arr = text.split("\r\n");
 
-let rarr = [];
+let rarr = []; // 결과 객체 배열
 
-let tempText = "";
+let rtext = ""; // 결과 문자열
 
 for (let i = 0; i < arr.length; i++) {
   let word = {};
   let example = [];
   if (arr[i].includes("-->")) {
     word.time = arr[i].replace("-->", "-").replaceAll(/,.../g, "");
-    // tempText += arr[i].replace("-->", "-").replaceAll(/,.../g, ""); // 텍스트 파일 생성
-    // tempText += "\r\n"; // 텍스트 파일 생성
+    // rtext += arr[i].replace("-->", "-").replaceAll(/,.../g, ""); // 텍스트 파일 생성
+    rtext += "\r\n"; // 텍스트 파일 생성
     i++;
+
+    let tmp = "";
     while (arr[i] !== "") {
-      example.push(arr[i]);
-      tempText += arr[i] += "\r\n"; // 텍스트
-      i++;
+      if (arr[i].includes("- ")) {
+        example.push(arr[i].replace("- ", ""));
+        rtext += arr[i].replace("- ", ""); // 텍스트
+        rtext += "\r\n"; // 텍스트
+        i++;
+      } else {
+        tmp += `${arr[i]} `;
+        i++;
+      }
     }
+    if (tmp !== "") {
+      example.push(tmp);
+      rtext += tmp; // 텍스트
+      rtext += "\r\n"; // 텍스트
+      tmp = "";
+    }
+
     word.example = example;
-    tempText += "\r\n"; // 텍스트
     rarr.push(word);
     word = {};
   }
 }
 
-// console.log(tempText);
+//
+
+let r = "";
+for (let line of rarr) {
+  // r += line.time;
+  // r += "\r\n";
+
+  r += line.example[0];
+  if (line.example[1] !== undefined) {
+    r += "\r\n";
+    r += line.example[1];
+  }
+  r += "\r\n\r\n";
+}
+
+writeFileSync("./asset/en_example.txt", r, "utf-8");
+
+// console.log(rarr[55].example);
+
+// console.log(rtext);
 
 // arr = arr.filter((t) => t !== "");
 
-// writeFileSync("./asset/en.txt", tempText, "utf-8");
+// writeFileSync("./asset/en.txt", rtext, "utf-8");
 
 // let text = readText("./asset/Avengers_Endgame.srt");
 

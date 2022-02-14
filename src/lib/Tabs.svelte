@@ -2,17 +2,14 @@
   import { quintOut } from "svelte/easing";
   import { fly, fade, slide, crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import Tab1 from "./Tab1.svelte";
-  import Tab2 from "./Tab2.svelte";
-  import Tab3 from "./Tab3.svelte";
   import { refresh, icon_list, icon_yet, icon_know } from "./icons.js";
   import { removeFromList, addToList, ori_items } from "./wordlist";
 
   // Tabs start
   export let tabs = [
-    { label: "Checks", icon: icon_list, value: 1, component: Tab1 },
-    { label: "Yets", icon: icon_yet, value: 2, component: Tab2 },
-    { label: "Knows", icon: icon_know, value: 3, component: Tab3 },
+    { label: "Checks", icon: icon_list, value: 1 },
+    { label: "Yets", icon: icon_yet, value: 2 },
+    { label: "Knows", icon: icon_know, value: 3 },
   ];
   let activeTabValue = 1;
   let tabRight = true;

@@ -21,26 +21,36 @@ text = readText("./asset/Avengers_Endgame.srt");
 // 객체 생성
 let arr = [];
 arr = text.split("\r\n");
+// ["", "", ...]
 
 let rarr = []; // 결과 객체 배열
+// example: ["", ""];
+// time: "";
 
-let rtext = ""; // 결과 문자열
+let wordArr = {};
+// let wordArr = {
+//   'word': [[time1, ex1_1, ex1_2], [time2, ex2_1, ex2_2]]
+// };
+
+let trArr = [];
+// word: a;
+// example: ["", ""];
+// exampleMean: ["", ""]; // papago
+// time: "";
+
+//
 
 for (let i = 0; i < arr.length; i++) {
   let word = {};
   let example = [];
   if (arr[i].includes("-->")) {
     word.time = arr[i].replace("-->", "-").replaceAll(/,.../g, "");
-    // rtext += arr[i].replace("-->", "-").replaceAll(/,.../g, ""); // 텍스트 파일 생성
-    rtext += "\r\n"; // 텍스트 파일 생성
     i++;
 
     let tmp = "";
     while (arr[i] !== "") {
       if (arr[i].includes("- ")) {
         example.push(arr[i].replace("- ", ""));
-        rtext += arr[i].replace("- ", ""); // 텍스트
-        rtext += "\r\n"; // 텍스트
         i++;
       } else {
         tmp += `${arr[i]} `;
@@ -49,8 +59,6 @@ for (let i = 0; i < arr.length; i++) {
     }
     if (tmp !== "") {
       example.push(tmp);
-      rtext += tmp; // 텍스트
-      rtext += "\r\n"; // 텍스트
       tmp = "";
     }
 
@@ -62,22 +70,48 @@ for (let i = 0; i < arr.length; i++) {
 
 //
 
-let r = "";
-for (let line of rarr) {
-  // r += line.time;
-  // r += "\r\n";
+// example 텍스트 파일
+// let r = "";
+// for (let line of rarr) {
+//   // r += line.time;
+//   // r += "\r\n";
 
-  r += line.example[0];
+//   r += line.example[0];
+//   if (line.example[1] !== undefined) {
+//     r += "\r\n";
+//     r += line.example[1];
+//   }
+//   r += "\r\n\r\n";
+// }
+// writeFileSync("./asset/en_example.txt", r, "utf-8");
+
+// console.log(voca.words(rarr[312].example));
+
+for (let line of rarr) {
+  let tmpWords = voca.words(line.example[0]);
   if (line.example[1] !== undefined) {
-    r += "\r\n";
-    r += line.example[1];
+    tmpWords = [...tmpWords, ...voca.words(line.example[1])];
   }
-  r += "\r\n\r\n";
+  let tmp = {};
+  for (let word of tmpWords) {
+    tmp.word = word;
+    tmp.example = [];
+    tmp.example = [...line.example, line.example[0]];
+    if (line.example[1] !== undefined) {
+      tmp.example = [...line.example, line.example[1]];
+    }
+    tmp.time = line.time;
+    wordArr.push(tmp);
+    tmp = {};
+  }
 }
 
-writeFileSync("./asset/en_example.txt", r, "utf-8");
+// console.log(rarr);
+console.log(wordArr);
 
-// console.log(rarr[55].example);
+//
+
+//
 
 // console.log(rtext);
 

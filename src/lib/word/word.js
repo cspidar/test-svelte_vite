@@ -93,19 +93,19 @@ for (let i = 0; i < arr.length; i++) {
 //
 
 // rarr 출력
-// let r = "";
-// for (let line of rarr) {
-//   r += line.time;
-//   r += "\r\n";
+let r = "";
+for (let line of rarr) {
+  // r += line.time;
+  // r += "\r\n";
 
-//   r += line.example[0];
-//   if (line.example[1] !== undefined) {
-//     r += "\r\n";
-//     r += line.example[1];
-//   }
-//   r += "\r\n\r\n";
-// }
-// writeFileSync("./en_example.txt", r, "utf-8");
+  r += line.example[0];
+  if (line.example[1] !== undefined) {
+    r += "\r\n";
+    r += line.example[1];
+  }
+  r += "\r\n\r\n";
+}
+writeFileSync("./en_example.txt", r, "utf-8");
 
 //
 

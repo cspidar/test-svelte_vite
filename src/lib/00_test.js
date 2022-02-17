@@ -1,5 +1,9 @@
 let led = "str";
 
-let t = { a: "b" };
+let arr = [1, 2, 3];
 
-console.log(t["A"]);
+let r = [];
+
+r.push(arr[2]);
+
+console.log(r);

@@ -296,4 +296,5 @@ export const delWords = [
   "zola",
   "strange",
   "Morgan",
+  "talk",
 ];

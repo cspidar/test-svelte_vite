@@ -8,7 +8,6 @@ import fetch from "node-fetch";
 let tmpText = "";
 
 // 텍스트 로드
-let srt;
 const readText = function (path) {
   try {
     return readFileSync(path, "utf-8");
@@ -16,7 +15,7 @@ const readText = function (path) {
     console.log(e);
   }
 };
-srt = readText("../asset/Avengers_Endgame.srt");
+let srt = readText("../asset/Avengers_Endgame.srt");
 
 //
 
@@ -26,8 +25,14 @@ arr = srt.split("\r\n");
 // ["", "", ...]
 
 let rarr = []; // 결과 객체 배열
-// example: ["", ""];
-// time: "";
+// let rarr = [
+//   {
+//     example: ["", ""],
+//     time: "",
+//   },
+// ];
+
+// example_en, example_ko 생성
 
 let trarr = []; // 번역 결과 포함 객체 배열
 // let trarr = [
@@ -40,24 +45,20 @@ let trarr = []; // 번역 결과 포함 객체 배열
 
 let wordObj = {}; // 단어별 시간, 예문 정리
 // let wordObj = {
-//   word: [
-//     [time1, ex1_1, ex1_2],
-//     [time2, ex2_1, ex2_2],
-//   ],
-// };
-// Tobe
-// let wordObj = {
 //   word: {
+//     time: [t1, t2],
 //     en: [
-//       [time1, ex1_1, ex1_2],
-//       [time2, ex2_1, ex2_2],
+//       [ex1_1, ex1_2],
+//       [ex2_1, ex2_2],
 //     ],
 //     ko: [
-//       [time1, ex1_1, ex1_2],
-//       [time2, ex2_1, ex2_2],
+//       [ex1_1, ex1_2],
+//       [ex2_1, ex2_2],
 //     ],
 //   },
 // };
+
+let wordList = {};
 
 //
 
@@ -92,66 +93,170 @@ for (let i = 0; i < arr.length; i++) {
 
 //
 
-// rarr 출력
-let r = "";
-for (let line of rarr) {
-  // r += line.time;
-  // r += "\r\n";
+// // rarr 출력
+// let r = "";
+// for (let line of rarr) {
+//   // r += line.time;
+//   // r += "\r\n";
 
-  r += line.example[0];
-  if (line.example[1] !== undefined) {
-    r += "\r\n";
-    r += line.example[1];
+//   r += line.example[0];
+//   if (line.example[1] !== undefined) {
+//     r += "\r\n";
+//     r += line.example[1];
+//   }
+//   r += "\r\n\r\n";
+// }
+// writeFileSync("./en_example.txt", r, "utf-8");
+
+//
+
+//trarr
+function exToArr(s_) {
+  let source = readText(`${s_}`);
+  let rawArr = source.split("\r\n");
+  let exArr = [];
+  let tmp = [];
+  for (let ex of rawArr) {
+    if (ex !== "") {
+      tmp.push(ex);
+    } else {
+      exArr.push(tmp);
+      tmp = [];
+    }
   }
-  r += "\r\n\r\n";
+  return exArr;
 }
-writeFileSync("./en_example.txt", r, "utf-8");
+let enArr_en = exToArr("./en_example.txt");
+let enArr_ko = exToArr("./ko_example.txt");
+// console.log(enArr_ko);
+
+for (let i = 0; i < rarr.length; i++) {
+  let tmp = {};
+  tmp.time = rarr[i].time;
+  tmp.en = enArr_en[i];
+  tmp.ko = enArr_ko[i];
+  trarr.push(tmp);
+  tmp = {};
+}
+// console.log(trarr[0]);
+
+// trarr 출력
+// let trarrText = "";
+// for (let unit of trarr) {
+//   trarrText += unit.time;
+//   trarrText += "\r\n";
+//   trarrText += unit.en;
+//   trarrText += "\r\n";
+//   trarrText += unit.ko;
+//   trarrText += "\r\n";
+//   trarrText += "\r\n";
+// }
+// writeFileSync("./trarrText.txt", trarrText, "utf-8");
+
+//
 
 //
 
 // wordObj
-for (let raw of rarr) {
-  let rawWords = voca.words(voca.lowerCase(raw.example[0]));
-  if (raw.example[1]) {
-    let others = voca.words(voca.lowerCase(raw.example[1]));
+for (let unit of trarr) {
+  let rawWords = voca.words(voca.lowerCase(unit.en[0]));
+  if (unit.en[1]) {
+    let others = voca.words(voca.lowerCase(unit.en[1]));
     rawWords = [...rawWords, ...others];
   }
   let tmp = new Set(rawWords); // 중복 제거
   let uniqueWords = [...tmp];
+  // console.log(uniqueWords);
 
   for (let word of uniqueWords) {
-    if (!wordObj[word]) wordObj[word] = [];
-    let wordExample = [raw.time, raw.example[0]];
-    if (raw.example[1] !== undefined) {
-      wordExample = [...wordExample, raw.example[1]];
+    if (!wordObj[word]) {
+      wordObj[word] = { time: [], en: [], ko: [] };
     }
-    wordObj[word].push(wordExample);
+    let wordExample_en = [unit.en[0]];
+    let wordExample_ko = [unit.ko[0]];
+    if (unit.en[1]) {
+      wordExample_en = [...wordExample_en, unit.en[1]];
+      wordExample_ko = [...wordExample_ko, unit.ko[1]];
+    }
+    wordObj[word].time.push(unit.time);
+    wordObj[word].en.push(wordExample_en);
+    wordObj[word].ko.push(wordExample_ko);
   }
 }
+// console.log(wordObj.needs.time);
 
+// wordObj 삭제 로직
 for (let word in wordObj) {
   if (!isNaN(Number(word))) delete wordObj[word];
   if (word.length === 1) delete wordObj[word];
   // if (Object.keys(wordObj[word]).length > 9) delete wordObj[word];
-
   for (let delWord of delWords) {
     delete wordObj[delWord];
   }
 }
-// console.log(wordObj["long"]);
+// console.log(wordObj);
+
+//
+
+// // wordObj 출력
+// for (let word in wordObj) {
+//   tmpText += word;
+//   tmpText += "\r\n";
+//   for (let i = 0; i < wordObj[word].en.length; i++) {
+//     tmpText += wordObj[word].time[i];
+//     tmpText += "\r\n";
+//     tmpText += wordObj[word].en[i][0];
+//     tmpText += "\r\n";
+//     tmpText += wordObj[word].ko[i][0];
+//     tmpText += "\r\n";
+//     if (wordObj[word].en[i][1]) {
+//       tmpText += wordObj[word].en[i][1];
+//       tmpText += "\r\n";
+//       tmpText += wordObj[word].ko[i][1];
+//       tmpText += "\r\n";
+//     }
+//   }
+//   tmpText += "\r\n";
+// }
+// writeFileSync("./tmpText.txt", tmpText, "utf-8");
 
 // wordObj 출력
-for (let obj in wordObj) {
-  tmpText += `${obj}\r\n`;
-  for (let example of wordObj[obj]) {
-    tmpText += `${example[1]}\r\n`;
-    if (example[2]) tmpText += `${example[2]}\r\n`;
+tmpText += `export const wordList = {`;
+for (let word in wordObj) {
+  tmpText += `${word}: {`;
+  tmpText += `time: [`;
+  for (let i = 0; i < wordObj[word].en.length; i++) {
+    tmpText += `"${wordObj[word].time[i]}",`;
   }
-  tmpText += `\r\n`;
-}
+  tmpText += `],`;
 
+  tmpText += `en: [`;
+  for (let i = 0; i < wordObj[word].en.length; i++) {
+    tmpText += `[`;
+    tmpText += `"${wordObj[word].en[i][0]}",`;
+    if (wordObj[word].en[i][1]) {
+      tmpText += `"${wordObj[word].en[i][1]}",`;
+    }
+    tmpText += `],`;
+  }
+  tmpText += `],`;
+  tmpText += `ko: [`;
+  for (let i = 0; i < wordObj[word].ko.length; i++) {
+    tmpText += `[`;
+    tmpText += `"${wordObj[word].ko[i][0]}",`;
+    if (wordObj[word].ko[i][1]) {
+      tmpText += `"${wordObj[word].ko[i][1]}",`;
+    }
+    tmpText += `],`;
+  }
+  tmpText += `],`;
+  tmpText += `},`;
+  tmpText += "\r\n";
+}
+tmpText += `}`;
 writeFileSync("./tmpText.txt", tmpText, "utf-8");
 
+//
 //
 
 //

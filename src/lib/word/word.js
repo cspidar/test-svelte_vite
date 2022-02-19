@@ -58,7 +58,7 @@ let wordObj = {}; // 단어별 시간, 예문 정리
 //   },
 // };
 
-let wordList = {};
+let wordList = []; // 단어별 배열화
 
 //
 
@@ -113,6 +113,7 @@ for (let i = 0; i < arr.length; i++) {
 //trarr
 function exToArr(s_) {
   let source = readText(`${s_}`);
+  source;
   let rawArr = source.split("\r\n");
   let exArr = [];
   let tmp = [];
@@ -221,9 +222,10 @@ for (let word in wordObj) {
 // writeFileSync("./tmpText.txt", tmpText, "utf-8");
 
 // wordObj 출력
-tmpText += `export const wordList = {`;
+tmpText += `export const wordList = [`;
 for (let word in wordObj) {
-  tmpText += `${word}: {`;
+  tmpText += `{`;
+  tmpText += `word: "${word}",`;
   tmpText += `time: [`;
   for (let i = 0; i < wordObj[word].en.length; i++) {
     tmpText += `"${wordObj[word].time[i]}",`;
@@ -233,27 +235,37 @@ for (let word in wordObj) {
   tmpText += `en: [`;
   for (let i = 0; i < wordObj[word].en.length; i++) {
     tmpText += `[`;
-    tmpText += `"${wordObj[word].en[i][0]}",`;
+    tmpText += `"${wordObj[word].en[i][0]
+      .replaceAll("'", "")
+      .replaceAll('"', "")}"`;
     if (wordObj[word].en[i][1]) {
-      tmpText += `"${wordObj[word].en[i][1]}",`;
+      tmpText += `,"${wordObj[word].en[i][1]
+        .replaceAll("'", "")
+        .replaceAll('"', "")}"`;
     }
     tmpText += `],`;
   }
   tmpText += `],`;
+  //No amount of money ever bought a second of
   tmpText += `ko: [`;
   for (let i = 0; i < wordObj[word].ko.length; i++) {
     tmpText += `[`;
-    tmpText += `"${wordObj[word].ko[i][0]}",`;
+    tmpText += `"${wordObj[word].ko[i][0]
+      .replaceAll("'", "")
+      .replaceAll('"', "")}"`;
     if (wordObj[word].ko[i][1]) {
-      tmpText += `"${wordObj[word].ko[i][1]}",`;
+      tmpText += `,"${wordObj[word].ko[i][1]
+        .replaceAll("'", "")
+        .replaceAll('"', "")}"`;
     }
     tmpText += `],`;
   }
   tmpText += `],`;
+
   tmpText += `},`;
   tmpText += "\r\n";
 }
-tmpText += `}`;
+tmpText += `]`;
 writeFileSync("./tmpText.txt", tmpText, "utf-8");
 
 //

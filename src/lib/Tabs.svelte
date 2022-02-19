@@ -3,7 +3,11 @@
   import { fly, fade, slide, crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { refresh, icon_list, icon_yet, icon_know } from "./icons.js";
-  import { removeFromList, addToList, ori_items } from "./wordlist";
+  import {
+    removeFromList,
+    addToList,
+    ori_items,
+  } from "./word/wordList_endGame";
 
   // Tabs start
   export let tabs = [
@@ -185,7 +189,7 @@
                         class="{subBtnStyle} inline-block px-2 z-50"
                         on:click={() => {
                           knows = addToList(knows, item);
-                          items = removeFromList(items, item);
+                          items = removeFromList(items, i);
                         }}
                       >
                         <svg
@@ -208,7 +212,7 @@
                         class="{subBtnStyle} inline-block px-2 ml-2 z-50"
                         on:click={() => {
                           yets = addToList(yets, item);
-                          items = removeFromList(items, item);
+                          items = removeFromList(items, i);
                         }}
                       >
                         <svg
@@ -243,7 +247,7 @@
                   {/if}
                   {#if !wordStatus[i]}
                     <p class="text-left">
-                      {item.example}
+                      {item.en[0]}
                     </p>
                   {/if}
                 </button>
@@ -264,8 +268,9 @@
               >
                 <p class="text-xl mb-1">{yet.word}</p>
                 <hr />
-                <p class="text-lg mt-2">{yet.mean}</p>
-                <p class="text-base">{yet.example}</p>
+                <p class="text-base">{yet.time[0]}</p>
+                <p class="text-base">{yet.en[0]}</p>
+                <p class="text-base">{yet.ko[0]}</p>
               </div>
             {/each}
           {/if}
@@ -281,8 +286,9 @@
               >
                 <p class="text-xl mb-1">{know.word}</p>
                 <hr />
-                <p class="text-lg mt-2">{know.mean}</p>
-                <p class="text-base">{know.example}</p>
+                <p class="text-base">{know.time[0]}</p>
+                <p class="text-base">{know.en[0]}</p>
+                <p class="text-base">{know.ko[0]}</p>
               </div>
             {/each}
           {/if}

@@ -4,7 +4,6 @@
   import { flip } from "svelte/animate";
   import { refresh, icon_list, icon_yet, icon_know } from "./icons.js";
   import { ori_items } from "./word/wordList_endGame";
-  import { E } from "../../dist/assets/vendor.394aa63e.js";
 
   export const removeFromList = (list, i) => list.splice(i, 1);
   export const addToList = (list, item) => list.push(item);
@@ -37,6 +36,7 @@
   export let checks = [];
   export let knows = [];
   export let yets = [];
+
   function fillChecks() {
     if (checks.length < 1) {
       for (let i = 0; i < 20; i++) {
@@ -50,8 +50,10 @@
   function loadList() {
     try {
       const chkSave = JSON.parse(localStorage.getItem("checks"));
-      if (chkSave === null || chkSave === undefined) return;
-      else {
+      if (chkSave === null || chkSave === undefined) {
+        fillChecks();
+        return;
+      } else {
         checks = JSON.parse(localStorage.getItem("checks"));
         knows = JSON.parse(localStorage.getItem("knows"));
         yets = JSON.parse(localStorage.getItem("yets"));

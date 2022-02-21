@@ -189,7 +189,7 @@ for (let unit of trarr) {
 // wordObj 삭제 로직
 for (let word in wordObj) {
   if (!isNaN(Number(word))) delete wordObj[word];
-  if (word.length === 1) delete wordObj[word];
+  if (word.length <= 2) delete wordObj[word];
   // if (Object.keys(wordObj[word]).length > 9) delete wordObj[word];
   for (let delWord of delWords) {
     delete wordObj[delWord];
@@ -222,7 +222,7 @@ for (let word in wordObj) {
 // writeFileSync("./tmpText.txt", tmpText, "utf-8");
 
 // wordObj 출력
-tmpText += `export const wordList = [`;
+tmpText += `export const ori_items = [`;
 for (let word in wordObj) {
   tmpText += `{`;
   tmpText += `word: "${word}",`;

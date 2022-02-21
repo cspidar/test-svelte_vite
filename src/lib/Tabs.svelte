@@ -3,11 +3,16 @@
   import { fly, fade, slide, crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { refresh, icon_list, icon_yet, icon_know } from "./icons.js";
-  import {
-    removeFromList,
-    addToList,
-    ori_items,
-  } from "./word/wordList_endGame";
+  import { ori_items } from "./word/wordList_endGame";
+  import { E } from "../../dist/assets/vendor.394aa63e.js";
+
+  export const removeFromList = (list, i) => list.splice(i, 1);
+  export const addToList = (list, item) => list.push(item);
+
+  const btnStyle =
+    "bg-white hover:bg-slate-100 text-slate-800 font-semibold py-3 px-4 border border-slate-400 rounded shadow text-sm h-fit";
+  const subBtnStyle =
+    "bg-white hover:bg-slate-200 hover:scale-105 text-slate-800 font-semibold py-2 px-1 border border-slate-400 rounded  text-sm h-9 relative transition-all active:scale-105 active:bg-slate-300";
 
   // Tabs start
   export let tabs = [
@@ -27,16 +32,27 @@
   // Tab1 start
 
   // save data
-  export let items = ori_items;
+  // export let items = ori_items;
+  let items = JSON.parse(JSON.stringify(ori_items)); // 깊은 복사
+  export let checks = [];
   export let knows = [];
   export let yets = [];
+  function fillChecks() {
+    if (checks.length < 1) {
+      for (let i = 0; i < 20; i++) {
+        if (items[0] !== undefined) {
+          checks.push(items.shift());
+        }
+      }
+    }
+  }
 
   function loadList() {
     try {
-      const chkSave = JSON.parse(localStorage.getItem("items"));
+      const chkSave = JSON.parse(localStorage.getItem("checks"));
       if (chkSave === null || chkSave === undefined) return;
       else {
-        items = JSON.parse(localStorage.getItem("items"));
+        checks = JSON.parse(localStorage.getItem("checks"));
         knows = JSON.parse(localStorage.getItem("knows"));
         yets = JSON.parse(localStorage.getItem("yets"));
       }
@@ -47,13 +63,15 @@
   loadList();
 
   function resetList() {
-    items = ori_items;
+    items = JSON.parse(JSON.stringify(ori_items));
+    checks = [];
     knows = [];
     yets = [];
     refreshList();
+    fillChecks();
   }
 
-  $: localStorage.setItem("items", JSON.stringify(items));
+  $: localStorage.setItem("checks", JSON.stringify(checks));
   $: localStorage.setItem("knows", JSON.stringify(knows));
   $: localStorage.setItem("yets", JSON.stringify(yets));
 
@@ -61,15 +79,12 @@
   let meanStatus;
   let subBtnStatus;
   function refreshList() {
-    wordStatus = new Array(items.length).fill(false);
-    meanStatus = new Array(items.length).fill(false);
-    subBtnStatus = new Array(items.length).fill(false);
+    wordStatus = new Array(checks.length).fill(false);
+    meanStatus = new Array(checks.length).fill(false);
+    subBtnStatus = new Array(checks.length).fill(false);
   }
   refreshList();
-  let btnStyle =
-    "bg-white hover:bg-slate-100 text-slate-800 font-semibold py-3 px-4 border border-slate-400 rounded shadow text-sm h-fit";
-  let subBtnStyle =
-    "bg-white hover:bg-slate-200 hover:scale-105 text-slate-800 font-semibold py-2 px-1 border border-slate-400 rounded  text-sm h-9 relative transition-all active:scale-105 active:bg-slate-300";
+
   // Tab1 end
 </script>
 
@@ -146,12 +161,12 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-2 break-words">
           <!-- Tab1 -->
           {#if tab.value === 1}
-            {#each items as item, i (item)}
+            {#each checks as check, i (check)}
               <div
                 class="flex"
                 animate:flip={{ duration: 300 }}
-                in:fade|local={{ duration: 100 }}
-                out:fly|local={{ x: 100 }}
+                out:fade|local={{ duration: 100 }}
+                in:fly|local={{ duration: 300 }}
               >
                 <button
                   class="{btnStyle} 
@@ -167,7 +182,7 @@
                         ? 'blur-sm'
                         : ''} z-10 transition-all delay-75 block"
                     >
-                      {item.word}
+                      {check.word}
                     </div>
                   </div>
 
@@ -188,8 +203,9 @@
                       <button
                         class="{subBtnStyle} inline-block px-2 z-50"
                         on:click={() => {
-                          knows = addToList(knows, item);
-                          items = removeFromList(items, i);
+                          addToList(knows, check);
+                          removeFromList(checks, i);
+                          fillChecks();
                         }}
                       >
                         <svg
@@ -211,8 +227,9 @@
                       <button
                         class="{subBtnStyle} inline-block px-2 ml-2 z-50"
                         on:click={() => {
-                          yets = addToList(yets, item);
-                          items = removeFromList(items, i);
+                          addToList(yets, check);
+                          removeFromList(checks, i);
+                          fillChecks();
                         }}
                       >
                         <svg
@@ -242,19 +259,19 @@
                 >
                   {#if wordStatus[i]}
                     <p class="text-center">
-                      {item.word}
+                      {check.word}
                     </p>
                   {/if}
                   {#if !wordStatus[i]}
                     <p class="text-left">
-                      {item.en[0]}
+                      {check.en[0]}
                     </p>
                   {/if}
                 </button>
               </div>
             {/each}
           {/if}
-
+          <div>남은 단어 숫자</div>
           <!-- Tab1 -->
 
           <!-- Tab2 -->
@@ -264,13 +281,15 @@
                 class={btnStyle}
                 animate:flip={{ duration: 200 }}
                 in:fade|local={{ duration: 100 }}
-                out:fly|local={{ x: 100 }}
               >
                 <p class="text-xl mb-1">{yet.word}</p>
                 <hr />
-                <p class="text-base">{yet.time[0]}</p>
-                <p class="text-base">{yet.en[0]}</p>
-                <p class="text-base">{yet.ko[0]}</p>
+                {#each yet.time as examNum, j (examNum)}
+                  <p class="text-xs mt-4">{yet.time[j]}</p>
+                  <p class="text-sm">{yet.en[j]}</p>
+                  <p class="text-sm mb-2">{yet.ko[j]}</p>
+                  <hr />
+                {/each}
               </div>
             {/each}
           {/if}
@@ -282,7 +301,6 @@
                 class={btnStyle}
                 animate:flip={{ duration: 200 }}
                 in:fade|local={{ duration: 100 }}
-                out:fly|local={{ x: 100 }}
               >
                 <p class="text-xl mb-1">{know.word}</p>
                 <hr />

@@ -1,4 +1,7 @@
-export const ori_items = [
+export const removeFromList = (list, i) => list.splice(i, 1);
+export const addToList = (list, item) => list.push(item);
+
+export let ori_items = [
   {
     word: "hold",
     time: [
@@ -4079,6 +4082,42 @@ export const ori_items = [
     ko: [["우린 일손이 부족할 거야, 알지? "]],
   },
   {
+    word: "em",
+    time: [
+      "00:13:49 - 00:13:51",
+      "01:52:22 - 01:52:23",
+      "01:52:27 - 01:52:28",
+      "01:55:18 - 01:55:19",
+      "02:07:38 - 02:07:40",
+      "02:20:52 - 02:20:54",
+      "02:21:21 - 02:21:23",
+      "02:21:23 - 02:21:26",
+      "02:43:06 - 02:43:08",
+    ],
+    en: [
+      ["So, lets get em. "],
+      ["Tell my family I love em. "],
+      ["You tell em yourself. "],
+      ["Did we get em all? "],
+      ["All I know is he doesnt have em. "],
+      ["Then you got em both the second time. "],
+      ["We need to get em back where they came from. "],
+      ["No way to get em back. Thanos destroyed the quantum tunnel. "],
+      ["you have to return the stones to the exact moment you got em... "],
+    ],
+    ko: [
+      ["자, 이제 잡읍시다 "],
+      ["가족들에게 사랑한다고 전해줘 "],
+      ["네가 직접 말해 "],
+      ["다 잡았나? "],
+      ["내가 아는 건 그가 그걸 가지고 있지 않다는 거야 "],
+      ["그럼 두 번 다 잡았군 "],
+      ["그들이 왔던 곳으로 다시 데려와야 해 "],
+      ["그들을 되찾을 방법이 없어. 타노스가 양자 터널을 파괴했어 "],
+      ["돌을 손에 넣은 그 순간으로 돌려놔야 해 "],
+    ],
+  },
+  {
     word: "use",
     time: [
       "00:13:51 - 00:13:53",
@@ -6685,6 +6724,30 @@ export const ori_items = [
     ],
   },
   {
+    word: "hi",
+    time: [
+      "00:30:37 - 00:30:40",
+      "01:31:27 - 01:31:28",
+      "01:41:33 - 01:41:34",
+      "02:26:49 - 02:26:52",
+      "02:45:51 - 02:45:52",
+    ],
+    en: [
+      ["Hi, hi! Is anyone home? "],
+      ["Hi. "],
+      ["Hi. "],
+      ["Hi, Im Peter Parker. "],
+      ["Hi, Sam. "],
+    ],
+    ko: [
+      ["안녕, 안녕! 집에 누구 있어요? "],
+      ["안녕 "],
+      ["안녕 "],
+      ["안녕하세요, 저는 피터 파커입니다. "],
+      ["안녕, 샘. "],
+    ],
+  },
+  {
     word: "home",
     time: [
       "00:30:37 - 00:30:40",
@@ -8889,6 +8952,42 @@ export const ori_items = [
     ko: [["둘 다 잘된 일이죠 "]],
   },
   {
+    word: "mr",
+    time: [
+      "00:37:48 - 00:37:49",
+      "00:38:31 - 00:38:34",
+      "01:16:30 - 01:16:33",
+      "01:18:17 - 01:18:20",
+      "01:20:13 - 01:20:14",
+      "02:32:29 - 02:32:31",
+      "02:32:33 - 02:32:36",
+      "02:32:42 - 02:32:45",
+      "02:32:47 - 02:32:49",
+    ],
+    en: [
+      ["Excuse me, Mr. Hulk?", "Yes."],
+      ["Thank you, Mr. Hulk.", "No, it was great, kids. Thank you very much."],
+      ["Mr. Rogers, I almost forgot that that suit... "],
+      ["No. No hitches at all, Mr. Secretary. "],
+      ["My friends call me Mr. Secretary. "],
+      ["Mr. Stark? "],
+      ["Mr. Stark. Can you hear me? "],
+      ["We won, Mr. Stark. "],
+      ["We won, Mr. Stark. "],
+    ],
+    ko: [
+      ["실례합니다, 헐크 씨?", "네."],
+      ["고마워요, 헐크 씨", "아니, 좋았어, 얘들아. 정말 감사합니다."],
+      ["로저스 씨, 그 양복 까먹을 뻔했네요 "],
+      ["아뇨, 전혀요 장관님 "],
+      ["제 친구들은 저를 장관님이라고 부릅니다. "],
+      ["스타크 씨? "],
+      ["스타크 씨 내 말 들려요? "],
+      ["우리가 이겼어요, 스타크 씨 "],
+      ["우리가 이겼어요, 스타크 씨 "],
+    ],
+  },
+  {
     word: "photo",
     time: ["00:37:49 - 00:37:51"],
     en: [["Can we get a photo? "]],
@@ -10579,6 +10678,30 @@ export const ori_items = [
     ],
   },
   {
+    word: "ya",
+    time: [
+      "00:49:42 - 00:49:43",
+      "01:06:41 - 01:06:42",
+      "01:43:13 - 01:43:16",
+      "02:00:07 - 02:00:10",
+      "02:46:14 - 02:46:16",
+    ],
+    en: [
+      ["This is Rocket.", "How ya doing?"],
+      ["See ya in a minute. "],
+      ["Thanks. Hold this, will ya?", "Yeah, sure."],
+      ["Friday, do me a favor and activate Barn Door Protocol, will ya? "],
+      ["Howd that work out for ya? "],
+    ],
+    ko: [
+      ["로켓입니다.", "어떻게 지내?"],
+      ["이따 봐. "],
+      ["고마워 이것 좀 들어줄래?", "네, 물론이죠."],
+      ["금요일, 부탁인데 반 도어 프로토콜을 활성화해 주시겠어요? "],
+      ["당신은 어떻게 됐나요? "],
+    ],
+  },
+  {
     word: "supplies",
     time: ["00:49:48 - 00:49:53"],
     en: [["We only see him once a month when he comes in for supplies. "]],
@@ -10786,6 +10909,18 @@ export const ori_items = [
     ],
   },
   {
+    word: "wi",
+    time: ["00:50:55 - 00:50:57"],
+    en: [["Beers in the bucket. Feel free to log on to the Wi-Fi. "]],
+    ko: [["맥주는 양동이에 있어 자유롭게 와이파이에 접속하세요."]],
+  },
+  {
+    word: "fi",
+    time: ["00:50:55 - 00:50:57"],
+    en: [["Beers in the bucket. Feel free to log on to the Wi-Fi. "]],
+    ko: [["맥주는 양동이에 있어 자유롭게 와이파이에 접속하세요."]],
+  },
+  {
     word: "password",
     time: ["00:50:58 - 00:50:59"],
     en: [["No password, obviously. "]],
@@ -10796,6 +10931,12 @@ export const ori_items = [
     time: ["00:50:58 - 00:50:59"],
     en: [["No password, obviously. "]],
     ko: [["비밀번호는 없어요 "]],
+  },
+  {
+    word: "tv",
+    time: ["00:51:02 - 00:51:05"],
+    en: [["That kid on the TV just called me a dickhead again. "]],
+    ko: [["TV에 나온 애가 또 날 멍청이라고 불렀어 "]],
   },
   {
     word: "dickhead",
@@ -13587,6 +13728,15 @@ export const ori_items = [
     ko: [["막 80층을 지났어요. "]],
   },
   {
+    word: "th",
+    time: ["01:18:07 - 01:18:08", "01:22:06 - 01:22:08"],
+    en: [
+      ["just passing the 80th floor. "],
+      ["I have eyes on Loki. 14th floor. "],
+    ],
+    ko: [["막 80층을 지났어요. "], ["로키가 보인다 14층 "]],
+  },
+  {
     word: "floor",
     time: ["01:18:07 - 01:18:08", "01:22:06 - 01:22:08"],
     en: [
@@ -13606,6 +13756,12 @@ export const ori_items = [
     time: ["01:18:13 - 01:18:15"],
     en: [["Evidence secure. "]],
     ko: [["증거 확보. "]],
+  },
+  {
+    word: "en",
+    time: ["01:18:15 - 01:18:16"],
+    en: [["Were en route to Doctor List. "]],
+    ko: [["닥터 리스트로 가는 길이야 "]],
   },
   {
     word: "route",
@@ -15374,6 +15530,14 @@ export const ori_items = [
     ko: [["네, 체슬러입니다. 6명을 복역시키려면 가능한 모든 MP가 필요해 "]],
   },
   {
+    word: "mp",
+    time: ["01:43:54 - 01:43:56"],
+    en: [
+      ["Yeah, this is Chesler. I need every available MP to sublevel six. "],
+    ],
+    ko: [["네, 체슬러입니다. 6명을 복역시키려면 가능한 모든 MP가 필요해 "]],
+  },
+  {
     word: "sublevel",
     time: ["01:43:54 - 01:43:56"],
     en: [
@@ -15392,6 +15556,18 @@ export const ori_items = [
     time: ["01:43:56 - 01:43:58"],
     en: [["We have a potential breach. "]],
     ko: [["잠재적 침입자가 있습니다 "]],
+  },
+  {
+    word: "ma",
+    time: ["01:44:17 - 01:44:19"],
+    en: [
+      [
+        "Theyre trying, maam, but Braddocks unit has been stopped by lightning strikes. ",
+      ],
+    ],
+    ko: [
+      ["노력하고 있습니다만, 부인 브래독의 부대는 번개에 의해 저지되었습니다 "],
+    ],
   },
   {
     word: "braddock",

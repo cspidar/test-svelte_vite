@@ -236,11 +236,11 @@ for (let word in wordObj) {
   for (let i = 0; i < wordObj[word].en.length; i++) {
     tmpText += `[`;
     tmpText += `"${wordObj[word].en[i][0]
-      .replaceAll("'", "")
+      .replaceAll("'", "'")
       .replaceAll('"', "")}"`;
     if (wordObj[word].en[i][1]) {
       tmpText += `,"${wordObj[word].en[i][1]
-        .replaceAll("'", "")
+        .replaceAll("'", "'")
         .replaceAll('"', "")}"`;
     }
     tmpText += `],`;
@@ -250,11 +250,11 @@ for (let word in wordObj) {
   for (let i = 0; i < wordObj[word].ko.length; i++) {
     tmpText += `[`;
     tmpText += `"${wordObj[word].ko[i][0]
-      .replaceAll("'", "")
+      .replaceAll("'", "'")
       .replaceAll('"', "")}"`;
     if (wordObj[word].ko[i][1]) {
-      tmpText += `,"${wordObj[word].ko[i][1]
-        .replaceAll("'", "")
+      tmpText += `, "${wordObj[word].ko[i][1]
+        .replaceAll("'", "'")
         .replaceAll('"', "")}"`;
     }
     tmpText += `],`;

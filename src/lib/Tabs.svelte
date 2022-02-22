@@ -2,7 +2,7 @@
   import { quintOut } from "svelte/easing";
   import { fly, fade, slide, crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import { onMount } from "svelte";
+  import { onMount, afterUpdate } from "svelte";
 
   import { refresh, icon_list, icon_yet, icon_know } from "./icons.js";
   import { removeFromList, addToList } from "./func.js";
@@ -81,9 +81,29 @@
     meanStatus = new Array(checks.length).fill(false);
     subBtnStatus = new Array(checks.length).fill(false);
   }
+
+  let selected;
+
+  function updateKnows() {
+    let toKnow = checks.shift();
+    knows = [...knows, toKnow];
+    let toCheck = fullList.shift();
+    checks = [...checks, toCheck];
+    selected = checks[0].word;
+  }
+
+  function updateYets() {
+    let toYet = checks.shift();
+    yets = [...yets, toYet];
+    let toCheck = fullList.shift();
+    checks = [...checks, toCheck];
+    selected = checks[0].word;
+  }
+
   onMount(() => {
     loadStatus();
     refreshStatus();
+    selected = checks[0].word;
   });
 </script>
 
@@ -92,7 +112,6 @@
     <button
       class="mr-2 hover:scale-90 active:scale-90 active:-rotate-180 transition-all ease-in-out duration-300"
       on:click={refreshList}
-      on:click={refreshStatus}
       ><svg
         xmlns="http://www.w3.org/2000/svg"
         class="inline-block h-6 w-6"
@@ -110,11 +129,7 @@
     </button>
     {#each tabs as tab}
       <li class={activeTabValue === tab.value ? "active" : ""}>
-        <span
-          class="tabs"
-          on:click={handleClick(tab.value)}
-          on:click={refreshList}
-        >
+        <span class="tabs" on:click={handleClick(tab.value)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="inline h-6 w-6"
@@ -138,7 +153,7 @@
 
 <!-- // -->
 
-<div class="mt-8 mb-14">
+<div class="mt-3 mb-14">
   {#each tabs as tab}
     {#if activeTabValue == tab.value}
       <div
@@ -162,85 +177,114 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-2 break-words">
           <!-- Tab1 -->
           {#if tab.value === 1}
-            {#each checks as check, i (check)}
-              <div
-                class="flex {btnStyle} grid text-lg {i === 0
-                  ? 'bg-slate-200 text-slate-900 border-slate-700 border-4'
-                  : ''}"
-                animate:flip={{ duration: 300 }}
-                in:fly|local={{ duration: 300 }}
-                out:fade|local={{ duration: 100 }}
-              >
+            <div class="tab1Page pt-6 px-4 space-y-2">
+              {#each checks as check, i (check)}
                 <div
-                  class="mb-2 font-semibold text-xl border-b-2 border-b-slate-700"
+                  class="flex {btnStyle} grid text-lg {i === 0
+                    ? 'bg-slate-100 text-slate-900 border-slate-500 border-4'
+                    : ''}"
+                  animate:flip={{ duration: 300 }}
+                  in:fly|local={{ duration: 300 }}
+                  out:fade|local={{ duration: 100 }}
                 >
-                  {check.word}
-                </div>
-
-                {#each check.time as examNum, j (examNum)}
-                  <div class="text-sm my-2 font-normal border-b-2">
-                    {check.en[j]}
+                  <div
+                    class="mb-2 font-semibold text-xl border-b-2 {i === 0
+                      ? 'border-b-slate-700'
+                      : ''}"
+                  >
+                    {check.word}
                   </div>
-                {/each}
+
+                  {#each check.time as examNum, j (examNum)}
+                    <div
+                      class="text-sm my-2 font-normal border-b-2 {i === 0
+                        ? 'border-b-slate-400'
+                        : ''}"
+                    >
+                      {check.en[j]}
+                    </div>
+                  {/each}
+                </div>
+              {/each}
+              <div
+                class="fixed inset-x-0 bottom-0 w-screen backdrop-blur  items-center border-t-2"
+              >
+                <div class="text-slate-700 text-center font-semibold mt-1">
+                  total: {fullList.length + checks.length} / {ori_items.length},
+                  knows: {knows.length}, yets: {yets.length}
+                </div>
+                <div class="grid grid-flow-row auto-rows-max">
+                  <button
+                    on:click={updateKnows}
+                    class="{subBtnStyle} mx-4 mb-1 mt-2 block"
+                    >I know <span
+                      class="inline-block text-2xl py-3 animate-bounce"
+                      >{selected}</span
+                    > !</button
+                  >
+                  <button
+                    on:click={updateYets}
+                    class="{subBtnStyle} mx-4 my-1 mb-2 py-3 block"
+                    >not yet...</button
+                  >
+                </div>
               </div>
-            {/each}
+            </div>
           {/if}
-          <!-- <div>남은 단어 숫자</div> -->
           <!-- Tab1 -->
 
           <!-- Tab2 -->
           {#if tab.value === 2}
-            {#each yets as yet, i (yet)}
-              <div
-                class={btnStyle}
-                animate:flip={{ duration: 200 }}
-                in:fade|local={{ duration: 100 }}
-              >
-                <p class="text-xl mb-1">{yet.word}</p>
-                <hr />
-                {#each yet.time as examNum, j (examNum)}
-                  <p class="text-xs mt-4">{yet.time[j]}</p>
-                  <p class="text-sm">{yet.en[j]}</p>
-                  <p class="text-sm mb-2">{yet.ko[j]}</p>
-                  <hr />
-                {/each}
-              </div>
-            {/each}
+            <div class="tab2Page pt-6 px-4 space-y-2">
+              <!-- {#each yets as yet, i (yet)}
+                <div
+                  class="flex {btnStyle} grid text-lg"
+                  animate:flip={{ duration: 300 }}
+                  in:fly|local={{ duration: 300 }}
+                  out:fade|local={{ duration: 100 }}
+                >
+                  <div class="mb-2 font-semibold text-xl border-b-2">
+                    {yet.word}
+                  </div>
+
+                  {#each yet.time as examNum, j (examNum)}
+                    <div class="text-sm my-2 font-normal border-b-2">
+                      {yet.en[j]}
+                    </div>
+                  {/each}
+                </div>
+              {/each} -->
+            </div>
           {/if}
 
           <!-- Tab3 -->
+          <!-- 리스트 저장 수정하고 나서 작업 -->
           {#if tab.value === 3}
-            {#each knows as know, i (know)}
-              <div
-                class={btnStyle}
-                animate:flip={{ duration: 200 }}
-                in:fade|local={{ duration: 100 }}
-              >
-                <p class="text-xl mb-1">{know.word}</p>
-                <hr />
-                <p class="text-base">{know.time[0]}</p>
-                <p class="text-base">{know.en[0]}</p>
-                <p class="text-base">{know.ko[0]}</p>
-              </div>
-            {/each}
+            <div class="tab3Page pt-6 px-4 grid grid-cols-2">
+              {#each knows as know, i (know)}
+                <div
+                  class="flex {btnStyle} grid text-lg"
+                  animate:flip={{ duration: 300 }}
+                  in:fly|local={{ duration: 300 }}
+                  out:fade|local={{ duration: 100 }}
+                >
+                  <div class="mb-0 font-semibold text-xl border-b-2">
+                    {know.word}
+                  </div>
+
+                  <!-- {#each know.time as examNum, j (examNum)}
+                    <div class="text-sm my-2 font-normal border-b-2">
+                      {know.en[j]}
+                    </div>
+                  {/each} -->
+                </div>
+              {/each}
+            </div>
           {/if}
         </div>
       </div>
     {/if}
   {/each}
-</div>
-
-<div
-  class="fixed inset-x-0 bottom-0 w-screen backdrop-blur  items-center  border-t-2"
->
-  <div class="text-slate-700 text-center mt-1">
-    total: {fullList.length + checks.length} / {ori_items.length}, knows: {knows.length},
-    yets: {yets.length}
-  </div>
-  <div class="grid grid-rows-2">
-    <button class="{subBtnStyle} mx-4 mb-1 mt-2 block">111</button>
-    <button class="{subBtnStyle} mx-4 my-1 block">222</button>
-  </div>
 </div>
 
 <style>
@@ -249,8 +293,6 @@
     margin-bottom: 10px;
     padding-top: 40px;
     padding-bottom: 40px;
-    padding-left: 2vw;
-    padding-right: 2vw;
     /* border: 1px solid #dee2e6; */
     border-radius: 0 0 0.5rem 0.5rem;
     border-top: 0;
@@ -291,8 +333,6 @@
     background-color: #fff;
     border-color: #dee2e6 #dee2e6 #fff;
   }
-
-  /* Tab1 */
   @keyframes bounce {
     0%,
     100% {
@@ -308,10 +348,17 @@
     animation: bounce 0.7s infinite;
   }
 
-  div {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    overflow-x: hidden;
+  .tab1Page {
+    overflow: hidden;
+  }
+  .tab2Page {
+    overflow-y: scroll;
+    height: 96vh;
+    padding-bottom: 4vh;
+  }
+  .tab3Page {
+    overflow-y: scroll;
+    height: 96vh;
+    padding-bottom: 4vh;
   }
 </style>

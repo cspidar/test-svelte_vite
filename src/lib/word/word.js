@@ -246,7 +246,6 @@ for (let word in wordObj) {
     tmpText += `],`;
   }
   tmpText += `],`;
-  //No amount of money ever bought a second of
   tmpText += `ko: [`;
   for (let i = 0; i < wordObj[word].ko.length; i++) {
     tmpText += `[`;

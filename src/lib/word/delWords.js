@@ -311,4 +311,6 @@ export const delWords = [
   "thanos",
   "lost",
   "kid",
+  "nate",
+  "bebe",
 ];

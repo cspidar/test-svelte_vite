@@ -239,7 +239,7 @@ for (let word in wordObj) {
       .replaceAll("'", "'")
       .replaceAll('"', "")}"`;
     if (wordObj[word].en[i][1]) {
-      tmpText += `,"${wordObj[word].en[i][1]
+      tmpText += `, "${wordObj[word].en[i][1]
         .replaceAll("'", "'")
         .replaceAll('"', "")}"`;
     }

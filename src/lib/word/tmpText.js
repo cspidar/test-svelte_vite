@@ -315,12 +315,6 @@ export const ori_items = [
     ko: [["겨자 두 잔 주세요! 고마워요, 엄마. "]],
   },
   {
-    word: "nate",
-    time: ["00:00:52 - 00:00:54"],
-    en: [["Nate, mayo or mustard? "]],
-    ko: [["네이트, 마요네즈, 머스타드? "]],
-  },
-  {
     word: "ketchup",
     time: ["00:00:54 - 00:00:55", "00:00:56 - 00:00:58"],
     en: [["How about ketchup? "], ["Or ketchup. I got ketchup, too. "]],

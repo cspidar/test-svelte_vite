@@ -28,6 +28,7 @@
   export let checks = [];
   export let knows = [];
   export let yets = [];
+  export let selected;
 
   // Save
   $: localStorage.setItem("fullList", fullList.length);
@@ -45,44 +46,33 @@
 
   // Fill checks
   function fillChecks() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       checks.push(fullList.shift());
     }
+    selected = checks[0].word;
   }
 
   // Load
   function loadStatus() {
     try {
+      let chkKnows = JSON.parse(localStorage.getItem("knows"));
+      let chkYets = JSON.parse(localStorage.getItem("yets"));
       if (
-        !localStorage.getItem("knows") ||
-        localStorage.getItem("knows") === "[]" ||
-        !localStorage.getItem("yets") ||
-        localStorage.getItem("yets") === "[]"
+        (chkKnows === null || chkKnows === undefined) &&
+        (chkYets === null || chkYets === undefined)
       ) {
         refreshList();
-        fillChecks();
       } else {
-        knows = JSON.parse(localStorage.getItem("knows"));
-        yets = JSON.parse(localStorage.getItem("yets"));
-        fullList = fullList.slice(0, knows.length + yets.length);
+        knows = chkKnows;
+        yets = chkYets;
+        fullList = fullList.slice(knows.length + yets.length, fullList.length);
         fillChecks();
       }
     } catch (e) {
       console.error(e);
     }
   }
-
-  // Button status
-  let wordStatus;
-  let meanStatus;
-  let subBtnStatus;
-  function refreshStatus() {
-    wordStatus = new Array(checks.length).fill(false);
-    meanStatus = new Array(checks.length).fill(false);
-    subBtnStatus = new Array(checks.length).fill(false);
-  }
-
-  let selected;
+  loadStatus();
 
   function updateKnows() {
     let toKnow = checks.shift();
@@ -101,10 +91,9 @@
   }
 
   onMount(() => {
-    loadStatus();
-    refreshStatus();
-    selected = checks[0].word;
+    console.log("mount!");
   });
+  // console.log("scriptEnd");
 </script>
 
 <div class="topTabs w-screen fixed top-0 left-0 right-0 z-50 backdrop-blur">
@@ -236,7 +225,7 @@
           <!-- Tab2 -->
           {#if tab.value === 2}
             <div class="tab2Page pt-6 px-4 space-y-2">
-              <!-- {#each yets as yet, i (yet)}
+              {#each yets as yet, i (yet)}
                 <div
                   class="flex {btnStyle} grid text-lg"
                   animate:flip={{ duration: 300 }}
@@ -248,37 +237,42 @@
                   </div>
 
                   {#each yet.time as examNum, j (examNum)}
-                    <div class="text-sm my-2 font-normal border-b-2">
+                    <div class="text-sm my-2 font-semibold border-b-2">
                       {yet.en[j]}
+                    </div>
+                    <div class="text-sm mt-0 mb-1 pl-2 font-normal border-b-2">
+                      {yet.ko[j]}
                     </div>
                   {/each}
                 </div>
-              {/each} -->
+              {/each}
             </div>
           {/if}
 
           <!-- Tab3 -->
           <!-- 리스트 저장 수정하고 나서 작업 -->
           {#if tab.value === 3}
-            <div class="tab3Page pt-6 px-4 grid grid-cols-2">
-              {#each knows as know, i (know)}
-                <div
-                  class="flex {btnStyle} grid text-lg"
-                  animate:flip={{ duration: 300 }}
-                  in:fly|local={{ duration: 300 }}
-                  out:fade|local={{ duration: 100 }}
-                >
-                  <div class="mb-0 font-semibold text-xl border-b-2">
-                    {know.word}
-                  </div>
+            <div class="tab3Page pt-6 px-4">
+              <div class="grid grid-cols-2 gap-4 text-lg">
+                {#each knows as know, i (know)}
+                  <div
+                    class="flex {btnStyle} "
+                    animate:flip={{ duration: 300 }}
+                    in:fly|local={{ duration: 300 }}
+                    out:fade|local={{ duration: 100 }}
+                  >
+                    <div class="font-semibold text-xl">
+                      {know.word}
+                    </div>
 
-                  <!-- {#each know.time as examNum, j (examNum)}
+                    <!-- {#each know.time as examNum, j (examNum)}
                     <div class="text-sm my-2 font-normal border-b-2">
                       {know.en[j]}
                     </div>
                   {/each} -->
-                </div>
-              {/each}
+                  </div>
+                {/each}
+              </div>
             </div>
           {/if}
         </div>

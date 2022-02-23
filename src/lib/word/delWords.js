@@ -313,4 +313,11 @@ export const delWords = [
   "kid",
   "nate",
   "bebe",
+  "blue",
+  "run",
+  "day",
+  "real",
+  "hawk",
+  "water",
+  "eyes",
 ];

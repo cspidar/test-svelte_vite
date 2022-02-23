@@ -93,6 +93,13 @@
   onMount(() => {
     console.log("mount!");
   });
+
+  let yetBtnStatus = {};
+  function yetBtnToggle(index) {
+    !yetBtnStatus[index]
+      ? (yetBtnStatus[index] = true)
+      : (yetBtnStatus[index] = false);
+  }
   // console.log("scriptEnd");
 </script>
 
@@ -163,7 +170,7 @@
               easing: quintOut,
             }}
       >
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-2 break-words">
+        <div class="grid gap-4 mb-2 break-words">
           <!-- Tab1 -->
           {#if tab.value === 1}
             <div class="tab1Page pt-6 px-4 space-y-2">
@@ -228,22 +235,41 @@
               {#each yets as yet, i (yet)}
                 <div
                   class="flex {btnStyle} grid text-lg"
-                  animate:flip={{ duration: 300 }}
                   in:fly|local={{ duration: 300 }}
                   out:fade|local={{ duration: 100 }}
                 >
-                  <div class="mb-2 font-semibold text-xl border-b-2">
-                    {yet.word}
-                  </div>
+                  <button
+                    class="block text-left"
+                    on:click={() => {
+                      yetBtnToggle(i);
+                    }}
+                  >
+                    <div class="font-semibold text-xl border-b-2">
+                      {yet.word}
+                    </div>
 
-                  {#each yet.time as examNum, j (examNum)}
-                    <div class="text-sm my-2 font-semibold border-b-2">
-                      {yet.en[j]}
-                    </div>
-                    <div class="text-sm mt-0 mb-1 pl-2 font-normal border-b-2">
-                      {yet.ko[j]}
-                    </div>
-                  {/each}
+                    {#if yetBtnStatus[i]}
+                      <!-- <div transition:slide|local> -->
+                      <div transition:slide class="my-10 text-base">1111</div>
+                      <div transition:slide class="my-10 text-base">1111</div>
+                      <div transition:slide class="my-10 text-base">1111</div>
+                      <!-- </div> -->
+                    {/if}
+
+                    {#each yet.time as examNum, j (examNum)}
+                      <div class="text-xs mb-1 mt-4 font-normal">
+                        {yet.time[j]}
+                      </div>
+                      <div class="text-sm mb-2 font-semibold border-b-2">
+                        {yet.en[j]}
+                      </div>
+                      <div
+                        class="text-sm mt-0 mb-1 pl-2 font-normal border-b-2"
+                      >
+                        {yet.ko[j]}
+                      </div>
+                    {/each}
+                  </button>
                 </div>
               {/each}
             </div>

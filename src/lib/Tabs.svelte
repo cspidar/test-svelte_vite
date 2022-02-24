@@ -90,16 +90,17 @@
     selected = checks[0].word;
   }
 
-  onMount(() => {
-    console.log("mount!");
-  });
-
   let yetBtnStatus = {};
   function yetBtnToggle(index) {
     !yetBtnStatus[index]
       ? (yetBtnStatus[index] = true)
       : (yetBtnStatus[index] = false);
   }
+
+  onMount(() => {
+    console.log("mount!");
+  });
+
   // console.log("scriptEnd");
 </script>
 
@@ -247,17 +248,21 @@
                     <div class="font-semibold text-xl border-b-2">
                       {yet.word}
                     </div>
-
-                    {#if yetBtnStatus[i]}
-                      <!-- <div transition:slide|local> -->
-                      <div transition:slide class="my-10 text-base">1111</div>
-                      <div transition:slide class="my-10 text-base">1111</div>
-                      <div transition:slide class="my-10 text-base">1111</div>
-                      <!-- </div> -->
-                    {/if}
-
+                    <div class="space-y-2 mt-2">
+                      {#if yetBtnStatus[i]}
+                        <div transition:slide|local>
+                          <div class="{subBtnStyle} text-base">1111</div>
+                        </div>
+                        <div transition:slide|local>
+                          <div class="{subBtnStyle} text-base">1111</div>
+                        </div>
+                        <div transition:slide|local>
+                          <div class="{subBtnStyle} text-base">1111</div>
+                        </div>
+                      {/if}
+                    </div>
                     {#each yet.time as examNum, j (examNum)}
-                      <div class="text-xs mb-1 mt-4 font-normal">
+                      <div class="text-xs mb-1 pt-2 font-normal">
                         {yet.time[j]}
                       </div>
                       <div class="text-sm mb-2 font-semibold border-b-2">

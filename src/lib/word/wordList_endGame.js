@@ -359,12 +359,6 @@ export const ori_items = [
     ko: [["팔꿈치 조심하세요. "]],
   },
   {
-    word: "hawk",
-    time: ["00:01:02 - 00:01:03"],
-    en: [["Good job, hawk-eye. "]],
-    ko: [["잘했어, 매눈아 "]],
-  },
-  {
     word: "arrow",
     time: ["00:01:03 - 00:01:05"],
     en: [["Go get your arrow. "]],
@@ -563,12 +557,6 @@ export const ori_items = [
     ko: [["SNS에 올리지 마세요. "]],
   },
   {
-    word: "real",
-    time: ["00:03:49 - 00:03:51"],
-    en: [["It's gonna be a real tearjerker. "]],
-    ko: [["정말 눈물 짜는 일이 될 거야. "]],
-  },
-  {
     word: "tearjerker",
     time: ["00:03:49 - 00:03:51"],
     en: [["It's gonna be a real tearjerker. "]],
@@ -661,27 +649,6 @@ export const ori_items = [
     ],
   },
   {
-    word: "day",
-    time: [
-      "00:03:59 - 00:04:01",
-      "00:12:25 - 00:12:27",
-      "00:20:32 - 00:20:34",
-      "01:22:24 - 01:22:25",
-    ],
-    en: [
-      ["Today's day 21. "],
-      ["He's gonna probably be out for the rest of the day. "],
-      ["I went on a date the other day. "],
-      ["I can do this all day. "],
-    ],
-    ko: [
-      ["오늘은 21일입니다. "],
-      ["그는 아마 남은 하루동안 밖에 있을거에요. "],
-      ["저는 요전 날 데이트를 했어요. "],
-      ["하루 종일 할 수 있어요 "],
-    ],
-  },
-  {
     word: "existential",
     time: ["00:04:05 - 00:04:07"],
     en: [["You know, if it wasn't for the existential terror... "]],
@@ -752,41 +719,6 @@ export const ori_items = [
       ["Infection's run its course, thanks to the Blue Meanie back there. "],
     ],
     ko: [["감염은 계속 진행중이야 블루 미니 덕분에요 "]],
-  },
-  {
-    word: "run",
-    time: [
-      "00:04:12 - 00:04:15",
-      "00:04:44 - 00:04:46",
-      "00:39:37 - 00:39:41",
-      "00:58:28 - 00:58:29",
-      "01:26:42 - 01:26:43",
-    ],
-    en: [
-      ["Infection's run its course, thanks to the Blue Meanie back there. "],
-      ["Oxygen will run out tomorrow morning... "],
-      ["So, I'd like to run one last sim before we pack it in for the night. "],
-      ["One test run. "],
-      ["Run diagnostics. "],
-    ],
-    ko: [
-      ["감염은 계속 진행중이야 블루 미니 덕분에요 "],
-      ["내일 아침에 산소가 바닥날거야 "],
-      [
-        "그래서, 오늘 밤에 준비하기 전에 마지막으로 시뮬레이션을 하나 더 해보고 싶어요. ",
-      ],
-      ["한 번의 테스트 실행. "],
-      ["진단을 실행합니다. "],
-    ],
-  },
-  {
-    word: "blue",
-    time: ["00:04:12 - 00:04:15", "01:12:03 - 01:12:05"],
-    en: [
-      ["Infection's run its course, thanks to the Blue Meanie back there. "],
-      ["All right, bring it down, Blue. "],
-    ],
-    ko: [["감염은 계속 진행중이야 블루 미니 덕분에요 "], ["내려놔, 블루 "]],
   },
   {
     word: "meanie",
@@ -953,12 +885,6 @@ export const ori_items = [
     time: ["00:04:31 - 00:04:34"],
     en: [["and bought ourselves about 48 hours of flight time. "]],
     ko: [["48시간의 비행시간을 벌었어요 "]],
-  },
-  {
-    word: "water",
-    time: ["00:04:37 - 00:04:39", "00:28:53 - 00:28:55"],
-    en: [["But it's now dead in the water. "], ["cleaner water. "]],
-    ko: [["하지만 지금은 물에 빠져 죽었어요. "], ["깨끗한 물 "]],
   },
   {
     word: "thousand",
@@ -1275,27 +1201,6 @@ export const ori_items = [
       ["그는 아마 남은 하루동안 밖에 있을거에요. "],
       ["하지만 당신은 쉴 수 있을까요? "],
       ["이제 쉬어도 돼요. "],
-    ],
-  },
-  {
-    word: "eyes",
-    time: [
-      "00:05:19 - 00:05:23",
-      "01:19:38 - 01:19:40",
-      "01:22:06 - 01:22:08",
-      "01:29:30 - 01:29:33",
-    ],
-    en: [
-      ["I should probably lie down for a minute. Go rest my eyes. "],
-      ["Thumbelina, do you copy? I've got eyes on the prize. "],
-      ["I have eyes on Loki. 14th floor. "],
-      ["I see with more than eyes, you know that. "],
-    ],
-    ko: [
-      ["잠깐 누워있어야겠어요 가서 내 눈을 쉬게 해. "],
-      ["썸벨리나, 들리나? 상품을 노리고 있어요 "],
-      ["로키가 보인다 14층 "],
-      ["난 눈보다 더 많은 걸 알아, 너도 알잖아. "],
     ],
   },
   {

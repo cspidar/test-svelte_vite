@@ -90,11 +90,33 @@
     selected = checks[0].word;
   }
 
+  function updateYetToKnows(index) {
+    let toKnow = yets[index];
+    knows = [...knows, toKnow];
+    let yets1 = yets.slice(0, index);
+    let yets2 = yets.slice(index + 1);
+    yets = [...yets1, ...yets2];
+  }
+
+  function updateKnowsToYet(index) {
+    let toYet = knows[index];
+    yets = [...yets, toYet];
+    let knows1 = knows.slice(0, index);
+    let knows2 = knows.slice(index + 1);
+    knows = [...knows1, ...knows2];
+  }
+
   let yetBtnStatus = {};
   function yetBtnToggle(index) {
     !yetBtnStatus[index]
       ? (yetBtnStatus[index] = true)
       : (yetBtnStatus[index] = false);
+  }
+  let knowBtnStatus = {};
+  function knowBtnToggle(index) {
+    !knowBtnStatus[index]
+      ? (knowBtnStatus[index] = true)
+      : (knowBtnStatus[index] = false);
   }
 
   onMount(() => {
@@ -150,11 +172,11 @@
 
 <!-- // -->
 
-<div class="mt-3 mb-14">
+<div class="mb-14">
   {#each tabs as tab}
     {#if activeTabValue == tab.value}
       <div
-        class="mainBody"
+        class="pt-9"
         in:fly={tabRight
           ? {
               delay: 0,
@@ -171,38 +193,51 @@
               easing: quintOut,
             }}
       >
-        <div class="grid gap-4 mb-2 break-words">
+        <div class="grid pt-4 h-full break-words">
           <!-- Tab1 -->
           {#if tab.value === 1}
-            <div class="tab1Page pt-6 px-4 space-y-2">
-              {#each checks as check, i (check)}
-                <div
-                  class="flex {btnStyle} grid text-lg {i === 0
-                    ? 'bg-slate-100 text-slate-900 border-slate-500 border-4'
-                    : ''}"
-                  animate:flip={{ duration: 300 }}
-                  in:fly|local={{ duration: 300 }}
-                  out:fade|local={{ duration: 100 }}
-                >
-                  <div
-                    class="mb-2 font-semibold text-xl border-b-2 {i === 0
-                      ? 'border-b-slate-700'
-                      : ''}"
-                  >
-                    {check.word}
-                  </div>
+            <div class="tab1Page px-4 pt-4 space-y-2">
+              <div class="grid mb-4 ">
+                {#each checks as check, i (check)}
+                  <div in:slide>
+                    <div class="block text-left " transition:slide|local>
+                      <div class="mb-2">
+                        <div
+                          class="flex {btnStyle} grid text-lg {i === 0
+                            ? 'bg-slate-100 text-slate-900 border-slate-500 border-4'
+                            : ''}"
+                          in:fly|local={{ duration: 300 }}
+                          out:fade|local={{ duration: 100 }}
+                        >
+                          <div
+                            class="mb-2 font-semibold text-xl border-b-2 {i ===
+                            0
+                              ? 'border-b-slate-700'
+                              : ''}"
+                          >
+                            {check.word}
+                          </div>
 
-                  {#each check.time as examNum, j (examNum)}
-                    <div
-                      class="text-sm my-2 font-normal border-b-2 {i === 0
-                        ? 'border-b-slate-400'
-                        : ''}"
-                    >
-                      {check.en[j]}
+                          {#each check.time as examNum, j (examNum)}
+                            <div
+                              class="text-sm my-2 font-normal border-b-2 {i ===
+                              0
+                                ? 'border-b-slate-400'
+                                : ''}"
+                            >
+                              {check.en[j]}
+                            </div>
+                          {/each}
+                        </div>
+                      </div>
                     </div>
-                  {/each}
-                </div>
-              {/each}
+                  </div>
+                {/each}
+              </div>
+            </div>
+          {/if}
+          {#if tab.value === 1}
+            <div>
               <div
                 class="fixed inset-x-0 bottom-0 w-screen backdrop-blur  items-center border-t-2"
               >
@@ -232,77 +267,120 @@
 
           <!-- Tab2 -->
           {#if tab.value === 2}
-            <div class="tab2Page pt-6 px-4 space-y-2">
-              {#each yets as yet, i (yet)}
-                <div
-                  class="flex {btnStyle} grid text-lg"
-                  in:fly|local={{ duration: 300 }}
-                  out:fade|local={{ duration: 100 }}
-                >
-                  <button
-                    class="block text-left"
-                    on:click={() => {
-                      yetBtnToggle(i);
-                    }}
-                  >
-                    <div class="font-semibold text-xl border-b-2">
-                      {yet.word}
+            <div class="tab2Page px-4">
+              <div class="grid pt-2 mb-4 ">
+                {#each yets as yet, i (yet)}
+                  <div in:slide>
+                    <div class="block text-left " transition:slide|local>
+                      <div class="mb-2">
+                        <div
+                          class="{btnStyle} py-3 grid text-lg"
+                          in:fly|local={{ duration: 300 }}
+                          out:fade|local={{ duration: 100 }}
+                        >
+                          <button
+                            class="text-left w-full"
+                            on:click={() => {
+                              yetBtnToggle(i);
+                            }}
+                          >
+                            <div class="font-semibold text-xl border-b-2">
+                              {yet.word}
+                            </div>
+                            <div class="space-y-2 mt-2 text-center">
+                              {#if yetBtnStatus[i]}
+                                <div transition:slide|local={{ duration: 200 }}>
+                                  <div
+                                    class="{subBtnStyle} text-base py-1"
+                                    on:click={updateYetToKnows(i)}
+                                  >
+                                    I know!
+                                  </div>
+                                </div>
+                                <!-- <div transition:slide|local={{ duration: 200 }}>
+                                  <div class="{subBtnStyle} text-base py-1">
+                                    sound like...
+                                  </div>
+                                </div> -->
+                              {/if}
+                            </div>
+                            {#each yet.time as examNum, j (examNum)}
+                              <div class="text-xs mb-1 pt-2 font-normal">
+                                {yet.time[j]}
+                              </div>
+                              <div
+                                class="text-sm mb-2 font-semibold border-b-2"
+                              >
+                                {yet.en[j]}
+                              </div>
+                              <div
+                                class="text-sm mt-0 mb-1 pl-2 font-normal border-b-2"
+                              >
+                                {yet.ko[j]}
+                              </div>
+                            {/each}
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <div class="space-y-2 mt-2">
-                      {#if yetBtnStatus[i]}
-                        <div transition:slide|local>
-                          <div class="{subBtnStyle} text-base">1111</div>
-                        </div>
-                        <div transition:slide|local>
-                          <div class="{subBtnStyle} text-base">1111</div>
-                        </div>
-                        <div transition:slide|local>
-                          <div class="{subBtnStyle} text-base">1111</div>
-                        </div>
-                      {/if}
-                    </div>
-                    {#each yet.time as examNum, j (examNum)}
-                      <div class="text-xs mb-1 pt-2 font-normal">
-                        {yet.time[j]}
-                      </div>
-                      <div class="text-sm mb-2 font-semibold border-b-2">
-                        {yet.en[j]}
-                      </div>
-                      <div
-                        class="text-sm mt-0 mb-1 pl-2 font-normal border-b-2"
-                      >
-                        {yet.ko[j]}
-                      </div>
-                    {/each}
-                  </button>
-                </div>
-              {/each}
+                  </div>
+                {/each}
+              </div>
             </div>
           {/if}
 
           <!-- Tab3 -->
           <!-- 리스트 저장 수정하고 나서 작업 -->
           {#if tab.value === 3}
-            <div class="tab3Page pt-6 px-4">
-              <div class="grid grid-cols-2 gap-4 text-lg">
-                {#each knows as know, i (know)}
-                  <div
-                    class="flex {btnStyle} "
-                    animate:flip={{ duration: 300 }}
-                    in:fly|local={{ duration: 300 }}
-                    out:fade|local={{ duration: 100 }}
-                  >
-                    <div class="font-semibold text-xl">
-                      {know.word}
-                    </div>
-
-                    <!-- {#each know.time as examNum, j (examNum)}
+            <div class="tab3Page px-4">
+              <div class="pt-2 mb-4">
+                <div class="grid grid-cols-2 gap-2 text-lg">
+                  {#each knows as know, i (know)}
+                    <div>
+                      <div class="block text-left " transition:slide>
+                        <div
+                          class="flex {btnStyle} "
+                          in:fly|local={{ duration: 300 }}
+                          out:fade|local={{ duration: 100 }}
+                        >
+                          <button
+                            class="text-left w-full"
+                            transition:slide|local
+                            on:click={() => {
+                              knowBtnToggle(i);
+                            }}
+                          >
+                            <div class="font-semibold text-xl border-b-2">
+                              {know.word}
+                            </div>
+                            <div class="space-y-2 mt-2 text-center">
+                              {#if knowBtnStatus[i]}
+                                <div transition:slide|local>
+                                  <div
+                                    class="{subBtnStyle} text-base py-1"
+                                    on:click={updateKnowsToYet(i)}
+                                  >
+                                    not yet...
+                                  </div>
+                                </div>
+                                <!-- <div transition:slide|local>
+                                  <div class="{subBtnStyle} text-base py-1">
+                                    sound like...
+                                  </div>
+                                </div> -->
+                              {/if}
+                            </div></button
+                          >
+                          <!-- {#each know.time as examNum, j (examNum)}
                     <div class="text-sm my-2 font-normal border-b-2">
                       {know.en[j]}
                     </div>
                   {/each} -->
-                  </div>
-                {/each}
+                        </div>
+                      </div>
+                    </div>
+                  {/each}
+                </div>
               </div>
             </div>
           {/if}
@@ -376,14 +454,11 @@
   .tab1Page {
     overflow: hidden;
   }
-  .tab2Page {
-    overflow-y: scroll;
-    height: 96vh;
-    padding-bottom: 4vh;
-  }
+  .tab2Page,
   .tab3Page {
     overflow-y: scroll;
-    height: 96vh;
-    padding-bottom: 4vh;
+    height: 93vh;
+    padding-top: 1vh;
+    padding-bottom: 5vh;
   }
 </style>

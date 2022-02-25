@@ -146,27 +146,6 @@ export const ori_items = [
     ],
   },
   {
-    word: "fingers",
-    time: [
-      "00:00:32 - 00:00:34",
-      "00:13:25 - 00:13:27",
-      "00:34:54 - 00:34:56",
-      "01:57:59 - 01:58:01",
-    ],
-    en: [
-      ["Ready? Three fingers. "],
-      ["When Thanos snapped his fingers... "],
-      ["We can snap our own fingers. We can bring everybody back. "],
-      ["Question is, who's gonna snap their freakin' fingers? "],
-    ],
-    ko: [
-      ["준비됐나요? 손가락 세 개. "],
-      ["타노스가 손가락을 부러뜨렸을 때... "],
-      ["우리가 직접 손가락을 부러뜨릴 수 있어요. 모두를 다시 데려올 수 있어 "],
-      ["문제는, 누가 망할 손가락을 부러뜨릴까? "],
-    ],
-  },
-  {
     word: "nice",
     time: [
       "00:00:35 - 00:00:36",
@@ -1013,30 +992,6 @@ export const ori_items = [
     ],
   },
   {
-    word: "looks",
-    time: [
-      "00:05:00 - 00:05:02",
-      "00:05:02 - 00:05:04",
-      "00:09:46 - 00:09:49",
-      "00:27:41 - 00:27:43",
-      "01:38:15 - 01:38:17",
-    ],
-    en: [
-      ["But it looks like... "],
-      ["Well, you know what it looks like. "],
-      ["are trying to take a census and it looks like he did... "],
-      ["Looks like a bunch of cartel guys... "],
-      ["Looks like we're improvising. "],
-    ],
-    ko: [
-      ["하지만, 마치... "],
-      ["어떻게 생겼는지 알잖아 "],
-      ["인구조사를 하려고 하는데... "],
-      ["카르텔 조직 같은데... "],
-      ["즉흥적으로 하는 것 같은데 "],
-    ],
-  },
-  {
     word: "mean",
     time: [
       "00:05:07 - 00:05:10",
@@ -1275,27 +1230,6 @@ export const ori_items = [
       ["그래서 무슨 일이야? 그냥 놀러 온 거야, 뭐야? "],
       ["잠깐 기다리세요 가고 있어요! "],
       ["기다려. 내가 잡았어, 꼬마야. "],
-    ],
-  },
-  {
-    word: "days",
-    time: [
-      "00:09:36 - 00:09:39",
-      "00:13:33 - 00:13:35",
-      "00:18:27 - 00:18:28",
-      "01:34:46 - 01:34:48",
-    ],
-    en: [
-      ["It's been 23 days since Thanos came to Earth. "],
-      ["Until two days ago... "],
-      ["You used them two days ago! "],
-      ["You used them two days ago! "],
-    ],
-    ko: [
-      ["타노스가 지구에 온 지 23일이 지났습니다. "],
-      ["이틀 전까지만 해도... "],
-      ["이틀 전에 썼잖아! "],
-      ["이틀 전에 썼잖아! "],
     ],
   },
   {
@@ -4517,55 +4451,6 @@ export const ori_items = [
     ko: [["여길 갈기갈기 찢어야 해 거짓말 하는 게 분명해! "]],
   },
   {
-    word: "things",
-    time: [
-      "00:18:50 - 00:18:51",
-      "00:20:45 - 00:20:48",
-      "00:20:56 - 00:20:58",
-      "00:27:00 - 00:27:03",
-      "00:43:40 - 00:43:42",
-      "00:46:13 - 00:46:15",
-      "00:51:33 - 00:51:35",
-      "01:03:49 - 01:03:50",
-      "01:07:57 - 01:07:59",
-      "01:16:07 - 01:16:09",
-      "01:20:26 - 01:20:29",
-      "01:35:39 - 01:35:41",
-    ],
-    en: [
-      ["My father is many things. "],
-      ["Same old crap. You know, how things have changed. "],
-      ["And then things got quiet... "],
-      ["The things that are happening on Earth are happening everywhere. "],
-      ["You can't say things like that. "],
-      ["Among other things, yeah. What are you doing here? "],
-      ["I've got beer, tequila, all sorts of things. "],
-      ["Yes, these things happen, though. You know? "],
-      ["Maybe smash a few things along the way. "],
-      ["Things look like they're just about wrapped up here. "],
-      [
-        "All right, move it, Stuart Little. Things are getting dicey out here. Let's go. ",
-      ],
-      ["My father is many things. "],
-    ],
-    ko: [
-      ["우리 아버지는 많은 일을 하신다. "],
-      ["똑같은 헛소리. 상황이 어떻게 변했는지 말이야 "],
-      ["그러다 조용해졌어요 "],
-      ["지구에서 일어나고 있는 일들이 어디에서나 일어나고 있습니다."],
-      ["그런 말 하면 안 돼요. "],
-      ["다른 것들 중에서, 그래. 여기는 어쩐 일이야? "],
-      ["맥주, 데킬라 등 여러 가지가 있어요 "],
-      ["네, 하지만 이런 일은 일어납니다. 아시겠어요? "],
-      ["가는 길에 물건 몇 개를 부숴버릴지도 몰라. "],
-      ["일이 거의 마무리된 것 같군 "],
-      [
-        "좋아, 움직여, 스튜어트 리틀. 여기 상황이 점점 불안정해지고 있어요. 떠나자 ",
-      ],
-      ["우리 아버지는 많은 일을 하신다. "],
-    ],
-  },
-  {
     word: "daughter",
     time: [
       "00:18:58 - 00:19:00",
@@ -5644,20 +5529,6 @@ export const ori_items = [
       ["넌 여기 있으면 안 돼 "],
       ["난 여기 있으면 안된다. 난 오지 말았어야 했어. "],
       ["이리 오너라. 바로 여기.", "난 여기 있으면 안된다. 이거 안 좋아."],
-    ],
-  },
-  {
-    word: "comes",
-    time: ["00:27:21 - 00:27:22", "00:49:48 - 00:49:53", "02:00:20 - 02:00:22"],
-    en: [
-      ["comes through me. "],
-      ["We only see him once a month when he comes in for supplies. "],
-      ["Everybody comes home. "],
-    ],
-    ko: [
-      ["나를 통해 들어온다. "],
-      ["우리는 그가 공급품을 가지러 올 때 한 달에 한 번만 그를 봅니다. "],
-      ["모두 집으로 돌아옵니다. "],
     ],
   },
   {
@@ -8288,20 +8159,6 @@ export const ori_items = [
     ko: [["지금은 혼란스러운 시기입니다. "], ["완벽하게 혼란스럽지 않다. "]],
   },
   {
-    word: "times",
-    time: ["00:37:02 - 00:37:04", "01:28:10 - 01:28:12", "02:06:19 - 02:06:20"],
-    en: [
-      ["These are confusing times. "],
-      ["from two different times. "],
-      ["Several times. "],
-    ],
-    ko: [
-      ["지금은 혼란스러운 시기입니다. "],
-      ["다른 두 시대의. "],
-      ["여러 번. "],
-    ],
-  },
-  {
     word: "meant",
     time: ["00:37:04 - 00:37:06", "01:25:56 - 01:25:59", "01:31:36 - 01:31:39"],
     en: [
@@ -8598,23 +8455,6 @@ export const ori_items = [
     ko: [["아무도 몰라. "]],
   },
   {
-    word: "wants",
-    time: ["00:38:15 - 00:38:16", "01:14:09 - 01:14:11", "02:35:30 - 02:35:33"],
-    en: [
-      [
-        "No, he wants you to take a picture with him.",
-        "I don't want a picture.",
-      ],
-      ["Get up. Father wants us back on the ship. "],
-      ["Everybody wants a happy ending, right? "],
-    ],
-    ko: [
-      ["아니요, 같이 사진 찍으래요.", "사진 찍기 싫어."],
-      ["일어나, 아버진 우리가 함선으로 돌아가길 원하신다 "],
-      ["다들 해피엔딩을 원하죠? "],
-    ],
-  },
-  {
     word: "picture",
     time: ["00:38:15 - 00:38:16", "00:38:21 - 00:38:23"],
     en: [
@@ -8660,48 +8500,10 @@ export const ori_items = [
     ko: [["아니, 넌 기분이 안 좋아.", "망할 전화 받아."]],
   },
   {
-    word: "kids",
-    time: ["00:38:31 - 00:38:34"],
-    en: [
-      ["Thank you, Mr. Hulk.", "No, it was great, kids. Thank you very much."],
-    ],
-    ko: [["고마워요, 헐크 씨", "아니, 좋았어, 얘들아. 정말 감사합니다."]],
-  },
-  {
     word: "dab",
     time: ["00:38:37 - 00:38:38"],
     en: [["Dab. "]],
     ko: [["댑. "]],
-  },
-  {
-    word: "knows",
-    time: [
-      "00:38:40 - 00:38:41",
-      "01:36:32 - 01:36:33",
-      "01:36:46 - 01:36:48",
-      "01:50:22 - 01:50:25",
-      "02:09:17 - 02:09:19",
-      "02:39:29 - 02:39:31",
-      "02:42:45 - 02:42:48",
-    ],
-    en: [
-      ["She knows better. "],
-      ["He knows! "],
-      ["Thanos knows. "],
-      ["Why? 'Cause he knows your daddy's name? "],
-      ["that knows not what it has lost... "],
-      ["She knows. "],
-      ["Everybody knows who's in charge. "],
-    ],
-    ko: [
-      ["그녀가 더 잘 안다. "],
-      ["알고 있어! "],
-      ["타노스는 안다. "],
-      ["왜? 네 아빠 이름을 알고 있어서? "],
-      ["무엇을 잃었는지 모르는... "],
-      ["그녀는 알고 있다. "],
-      ["누가 책임자인지는 모두가 알고 있어요. "],
-    ],
   },
   {
     word: "outside",
@@ -8935,12 +8737,6 @@ export const ori_items = [
     ],
   },
   {
-    word: "says",
-    time: ["00:40:26 - 00:40:27"],
-    en: [["Only Mommy says that word. "]],
-    ko: [["엄마만 그런 말을 해 "]],
-  },
-  {
     word: "word",
     time: [
       "00:40:26 - 00:40:27",
@@ -9080,12 +8876,6 @@ export const ori_items = [
     time: ["00:41:36 - 00:41:37"],
     en: [["Not that it's a competition... "]],
     ko: [["경쟁이라기보다는... "]],
-  },
-  {
-    word: "loves",
-    time: ["00:41:37 - 00:41:39"],
-    en: [["but she loves me 3,000. "]],
-    ko: [["하지만 그녀는 3천명을 사랑해. "]],
   },
   {
     word: "somewhere",
@@ -9231,12 +9021,6 @@ export const ori_items = [
     time: ["00:42:51 - 00:42:53"],
     en: [["has been one of the few failures of my entire life. "]],
     ko: [["내 평생에 몇 안 되는 실패 중 하나였어 "]],
-  },
-  {
-    word: "tells",
-    time: ["00:42:58 - 00:42:59"],
-    en: [["Something tells me... "]],
-    ko: [["뭔가 생각나는... "]],
   },
   {
     word: "lockbox",
@@ -10182,12 +9966,6 @@ export const ori_items = [
     ],
   },
   {
-    word: "ways",
-    time: ["00:49:38 - 00:49:40"],
-    en: [["I think I liked you better either of the other ways. "]],
-    ko: [["나는 다른 방법 중 어느 쪽이든 너를 더 좋아했던 것 같아. "]],
-  },
-  {
     word: "rocket",
     time: ["00:49:42 - 00:49:43", "00:57:52 - 00:57:53", "02:03:31 - 02:03:33"],
     en: [
@@ -10696,20 +10474,6 @@ export const ori_items = [
     ],
   },
   {
-    word: "ones",
-    time: ["00:53:36 - 00:53:37", "01:13:12 - 01:13:14", "01:15:31 - 01:15:34"],
-    en: [
-      ["The ones that are left, anyway. "],
-      ["We're not the only ones in 2014 looking for the stones. "],
-      ["We're not the only ones in 2014 looking for the stones. "],
-    ],
-    ko: [
-      ["어쨌든 남은 것들. "],
-      ["2014년에 우리만 돌을 찾는 게 아니야 "],
-      ["2014년에 우리만 돌을 찾는 게 아니야 "],
-    ],
-  },
-  {
     word: "anyway",
     time: ["00:53:36 - 00:53:37"],
     en: [["The ones that are left, anyway. "]],
@@ -11014,18 +10778,6 @@ export const ori_items = [
     ],
   },
   {
-    word: "overs",
-    time: ["00:58:20 - 00:58:21", "01:05:58 - 01:06:00", "01:37:34 - 01:37:35"],
-    en: [["No do-overs. "], ["no do-overs. "], ["There's no do-overs. "]],
-    ko: [["재도전 금지. "], ["재도전 금지. "], ["재도전 같은 건 없어 "]],
-  },
-  {
-    word: "runs",
-    time: ["00:58:22 - 00:58:24"],
-    en: [["Plus two test runs. "]],
-    ko: [["테스트 주행 2회 추가. "]],
-  },
-  {
     word: "discombobulated",
     time: ["00:58:38 - 00:58:41"],
     en: [
@@ -11076,20 +10828,6 @@ export const ori_items = [
       ["계획 변경. "],
       ["지난 5년 동안 아무것도 바꾸지 마세요. "],
       ["옷 갈아입어도 돼. "],
-    ],
-  },
-  {
-    word: "gets",
-    time: ["00:58:59 - 00:59:02", "01:14:30 - 01:14:31", "01:16:41 - 01:16:43"],
-    en: [
-      ["Look, we go back, we get the stones before Thanos gets them... "],
-      ["If he gets all of them... "],
-      ["Who gets the magic wand? "],
-    ],
-    ko: [
-      ["타노스가 돌멩이를 가지기 전에... "],
-      ["만약 그가 그것들을 모두 가져간다면... "],
-      ["누가 마법 지팡이를 가져갔지? "],
     ],
   },
   {
@@ -11694,12 +11432,6 @@ export const ori_items = [
     ko: [["무서운 존재. "]],
   },
   {
-    word: "beings",
-    time: ["01:03:10 - 01:03:11"],
-    en: [["Scary beings. "]],
-    ko: [["무서운 존재. "]],
-  },
-  {
     word: "jane",
     time: [
       "01:03:12 - 01:03:13",
@@ -11955,12 +11687,6 @@ export const ori_items = [
     ko: [["이비인후과와 모자의 토끼가 만난다. "]],
   },
   {
-    word: "meets",
-    time: ["01:04:50 - 01:04:52"],
-    en: [["Ear-nose-throat meets rabbit-from-hat. "]],
-    ko: [["이비인후과와 모자의 토끼가 만난다. "]],
-  },
-  {
     word: "rabbit",
     time: ["01:04:50 - 01:04:52", "01:31:09 - 01:31:10"],
     en: [["Ear-nose-throat meets rabbit-from-hat. "], ["Get that rabbit! "]],
@@ -12044,18 +11770,6 @@ export const ori_items = [
       ["현관문을 닫아. "],
       ["문은 이쪽이야, 친구 "],
       ["금요일, 부탁인데 반 도어 프로토콜을 활성화해 주시겠어요? "],
-    ],
-  },
-  {
-    word: "teams",
-    time: ["01:05:16 - 01:05:20", "01:05:49 - 01:05:52"],
-    en: [
-      ["Six stones, three teams, one shot. "],
-      ["You know your teams. You know your missions. "],
-    ],
-    ko: [
-      ["스톤 6개, 팀 3개, 샷 1개. "],
-      ["팀을 잘 알잖아요 임무에 대해 잘 아시잖아요 "],
     ],
   },
   {
@@ -12949,27 +12663,6 @@ export const ori_items = [
     time: ["01:16:30 - 01:16:33"],
     en: [["Mr. Rogers, I almost forgot that that suit... "]],
     ko: [["로저스 씨, 그 양복 까먹을 뻔했네요 "]],
-  },
-  {
-    word: "ass",
-    time: [
-      "01:16:33 - 01:16:35",
-      "01:16:38 - 01:16:41",
-      "01:23:35 - 01:23:36",
-      "01:51:58 - 01:52:00",
-    ],
-    en: [
-      ["did nothing for your ass. "],
-      ["As far as I'm concerned, that's America's ass. "],
-      ["That is America's ass. "],
-      ["You're a pain in my ass, you know that? "],
-    ],
-    ko: [
-      ["널 위해 아무것도 하지 않았어 "],
-      ["내가 아는 한, 그건 미국의 엉덩이야. "],
-      ["그건 미국의 엉덩이야 "],
-      ["넌 내 골칫거리야, 알아? "],
-    ],
   },
   {
     word: "asked",
@@ -15049,12 +14742,6 @@ export const ori_items = [
     ko: [["그래서, 이름들 가지고 어디 있어? "]],
   },
   {
-    word: "likes",
-    time: ["01:45:01 - 01:45:04"],
-    en: [["Well, if it's a boy, my wife likes Elmonzo. "]],
-    ko: [["아들이면 아내가 엘몬조를 좋아해요 "]],
-  },
-  {
     word: "elmonzo",
     time: ["01:45:01 - 01:45:04"],
     en: [["Well, if it's a boy, my wife likes Elmonzo. "]],
@@ -15215,12 +14902,6 @@ export const ori_items = [
       ["너와 나는 어떻게 되는 거야? "],
       ["내가 무슨 일이 일어나는지 말해준다면... "],
     ],
-  },
-  {
-    word: "finds",
-    time: ["01:47:14 - 01:47:16"],
-    en: [["Thanos finds the Soul Stone. "]],
-    ko: [["타노스가 영혼의 돌을 찾습니다. "]],
   },
   {
     word: "disgust",
@@ -16644,12 +16325,6 @@ export const ori_items = [
     time: ["02:44:03 - 02:44:05"],
     en: [["It's gonna be okay, Buck. "]],
     ko: [["괜찮을 거야, 벅 "]],
-  },
-  {
-    word: "needs",
-    time: ["02:44:14 - 02:44:17"],
-    en: [["For him, as long as he needs. For us, five seconds. "]],
-    ko: [["그가 필요한 한 그를 위해. 우리는 5초. "]],
   },
   {
     word: "returning",

@@ -320,4 +320,5 @@ export const delWords = [
   "hawk",
   "water",
   "eyes",
+  "finger",
 ];

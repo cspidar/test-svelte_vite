@@ -457,7 +457,7 @@
   .tab2Page,
   .tab3Page {
     overflow-y: scroll;
-    height: 93vh;
+    height: 95vh;
     padding-top: 1vh;
     padding-bottom: 5vh;
   }

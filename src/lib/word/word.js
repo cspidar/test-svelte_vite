@@ -192,8 +192,9 @@ for (let word in wordObj) {
   if (word.length <= 2) delete wordObj[word];
   // if (Object.keys(wordObj[word]).length > 9) delete wordObj[word];
   for (let delWord of delWords) {
-    delete wordObj[delWord];
+    if (wordObj[delWord]) delete wordObj[delWord];
     if (wordObj[`${delWord}s`]) delete wordObj[`${delWord}s`];
+    // if (wordObj[`${delWord}ed`]) delete wordObj[`${delWord}ed`];
   }
 }
 // console.log(wordObj);

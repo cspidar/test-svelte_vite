@@ -287,6 +287,22 @@
                             <div class="font-semibold text-xl border-b-2">
                               {yet.word}
                             </div>
+
+                            {#each yet.time as examNum, j (examNum)}
+                              <div class="text-xs mb-1 pt-2 font-normal">
+                                {yet.time[j]}
+                              </div>
+                              <div
+                                class="text-sm mb-2 font-semibold border-b-2"
+                              >
+                                {yet.en[j]}
+                              </div>
+                              <div
+                                class="text-sm mt-0 mb-1 pl-2 font-normal border-b-2"
+                              >
+                                {yet.ko[j]}
+                              </div>
+                            {/each}
                             <div class="space-y-2 mt-2 text-center">
                               {#if yetBtnStatus[i]}
                                 <div transition:slide|local={{ duration: 200 }}>
@@ -304,21 +320,6 @@
                                 </div> -->
                               {/if}
                             </div>
-                            {#each yet.time as examNum, j (examNum)}
-                              <div class="text-xs mb-1 pt-2 font-normal">
-                                {yet.time[j]}
-                              </div>
-                              <div
-                                class="text-sm mb-2 font-semibold border-b-2"
-                              >
-                                {yet.en[j]}
-                              </div>
-                              <div
-                                class="text-sm mt-0 mb-1 pl-2 font-normal border-b-2"
-                              >
-                                {yet.ko[j]}
-                              </div>
-                            {/each}
                           </button>
                         </div>
                       </div>

@@ -58,6 +58,8 @@
       let chkKnows = JSON.parse(localStorage.getItem("knows"));
       let chkYets = JSON.parse(localStorage.getItem("yets"));
       if (
+        // 1 + 1 ===
+        // 2
         (chkKnows === null || chkKnows === undefined) &&
         (chkYets === null || chkYets === undefined)
       ) {
@@ -458,7 +460,7 @@
   .tab2Page,
   .tab3Page {
     overflow-y: scroll;
-    height: 95vh;
+    height: 94vh;
     padding-top: 1vh;
     padding-bottom: 5vh;
   }

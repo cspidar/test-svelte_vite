@@ -291,7 +291,7 @@
                             </div>
 
                             {#each yet.time as examNum, j (examNum)}
-                              <div class="text-xs mb-1 pt-2 font-normal">
+                              <div class="text-xs mb-1 pt-3 font-normal">
                                 {yet.time[j]}
                               </div>
                               <div
@@ -333,7 +333,6 @@
           {/if}
 
           <!-- Tab3 -->
-          <!-- 리스트 저장 수정하고 나서 작업 -->
           {#if tab.value === 3}
             <div class="tab3Page px-4">
               <div class="pt-2 mb-4">

@@ -2,12 +2,12 @@
   import { quintOut } from "svelte/easing";
   import { fly, fade, slide, crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import { onMount, afterUpdate } from "svelte";
+  import { onMount, afterUpdate, beforeUpdate } from "svelte";
 
   import { refresh, icon_list, icon_yet, icon_know } from "./icons.js";
-  import { removeFromList, addToList } from "./func.js";
   import { btnStyle, subBtnStyle, footBtnStyle } from "./style.js";
   import { ori_items } from "./word/wordList_endGame.js";
+  import InfiniteScroll from "./func/InfiniteScroll.svelte";
 
   //
 
@@ -21,13 +21,44 @@
   export let tabRight = true;
   export const handleClick = (tabValue) => {
     tabValue > activeTabValue ? (tabRight = true) : (tabRight = false);
+    if (tabValue === 2) {
+      curr_yets = JSON.parse(localStorage.getItem("yets"));
+      yets_scroll();
+    }
+    if (tabValue !== 2) {
+      show_yets = [];
+      update_show_yets = [];
+      page = 0;
+    }
     return (activeTabValue = tabValue);
   };
 
+  // if (tabValue === 2) {
+  //     beforeUpdate(() => {
+  //       yets_scroll();
+  //     });
+  //   } else {
+  //     afterUpdate(() => {
+  //       page = 0;
+  //     });
+  //   }
+
+  // 무한 스크롤
+  let page = 0;
+  let size = 20;
   export let fullList = JSON.parse(JSON.stringify(ori_items)); // 깊은 복사
   export let checks = [];
   export let knows = [];
   export let yets = [];
+
+  let show_yets = [];
+  let update_show_yets = [];
+  let curr_yets = [];
+  function yets_scroll() {
+    update_show_yets = curr_yets.slice(page * size, (page + 1) * size);
+  }
+  $: show_yets = [...show_yets, ...update_show_yets];
+
   export let selected;
 
   // Save
@@ -93,11 +124,12 @@
   }
 
   function updateYetToKnows(index) {
-    let toKnow = yets[index];
+    let toKnow = show_yets[index];
     knows = [...knows, toKnow];
     let yets1 = yets.slice(0, index);
     let yets2 = yets.slice(index + 1);
     yets = [...yets1, ...yets2];
+    show_yets.splice(index, 1);
   }
 
   function updateKnowsToYet(index) {
@@ -122,6 +154,7 @@
   }
 
   onMount(() => {
+    // yets_scroll();
     console.log("mount!");
   });
 
@@ -271,7 +304,7 @@
           {#if tab.value === 2}
             <div class="tab2Page px-4">
               <div class="grid pt-2 mb-4 ">
-                {#each yets as yet, i (yet)}
+                {#each show_yets as yet, i (yet)}
                   <div in:slide>
                     <div class="block text-left " transition:slide|local>
                       <div class="mb-2">
@@ -329,6 +362,22 @@
                   </div>
                 {/each}
               </div>
+              <InfiniteScroll
+                hasMore={update_show_yets.length}
+                threshold={80}
+                on:loadMore={() => {
+                  page++;
+                  yets_scroll();
+                }}
+              />
+              <!-- <InfiniteScroll
+                hasMore={yets.length > (page + 1) * size}
+                threshold={80}
+                on:loadMore={() => {
+                  page++;
+                  yets_scroll();
+                }}
+              /> -->
             </div>
           {/if}
 

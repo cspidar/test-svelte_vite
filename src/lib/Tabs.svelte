@@ -28,43 +28,59 @@
     if (tabValue !== 2) {
       show_yets = [];
       update_show_yets = [];
-      page = 0;
+      show_yet_page = 0;
     }
+    if (tabValue === 3) {
+      curr_knows = JSON.parse(localStorage.getItem("knows"));
+      knows_scroll();
+    }
+    if (tabValue !== 3) {
+      show_knows = [];
+      update_show_knows = [];
+      show_know_page = 0;
+    }
+
     return (activeTabValue = tabValue);
   };
 
-  // if (tabValue === 2) {
-  //     beforeUpdate(() => {
-  //       yets_scroll();
-  //     });
-  //   } else {
-  //     afterUpdate(() => {
-  //       page = 0;
-  //     });
-  //   }
-
-  // 무한 스크롤
-  let page = 0;
-  let size = 20;
   export let fullList = JSON.parse(JSON.stringify(ori_items)); // 깊은 복사
   export let checks = [];
-  export let knows = [];
-  export let yets = [];
 
+  // 무한 스크롤
+  export let yets = [];
+  let show_yet_page = 0;
+  let show_yet_size = 20;
   let show_yets = [];
   let update_show_yets = [];
   let curr_yets = [];
   function yets_scroll() {
-    update_show_yets = curr_yets.slice(page * size, (page + 1) * size);
+    update_show_yets = curr_yets.slice(
+      show_yet_page * show_yet_size,
+      (show_yet_page + 1) * show_yet_size
+    );
   }
   $: show_yets = [...show_yets, ...update_show_yets];
+
+  export let knows = [];
+  let show_know_page = 0;
+  let show_know_size = 60;
+  let show_knows = [];
+  let update_show_knows = [];
+  let curr_knows = [];
+  function knows_scroll() {
+    update_show_knows = curr_knows.slice(
+      show_know_page * show_know_size,
+      (show_know_page + 1) * show_know_size
+    );
+  }
+  $: show_knows = [...show_knows, ...update_show_knows];
 
   export let selected;
 
   // Save
   $: localStorage.setItem("fullList", fullList.length);
-  $: localStorage.setItem("knows", JSON.stringify(knows));
   $: localStorage.setItem("yets", JSON.stringify(yets));
+  $: localStorage.setItem("knows", JSON.stringify(knows));
 
   // Refresh
   function refreshList() {
@@ -86,8 +102,8 @@
   // Load
   function loadStatus() {
     try {
-      let chkKnows = JSON.parse(localStorage.getItem("knows"));
       let chkYets = JSON.parse(localStorage.getItem("yets"));
+      let chkKnows = JSON.parse(localStorage.getItem("knows"));
       if (
         // 1 + 1 ===
         // 2
@@ -133,12 +149,21 @@
   }
 
   function updateKnowsToYet(index) {
-    let toYet = knows[index];
+    let toYet = show_knows[index];
     yets = [...yets, toYet];
     let knows1 = knows.slice(0, index);
     let knows2 = knows.slice(index + 1);
     knows = [...knows1, ...knows2];
+    show_knows.splice(index, 1);
   }
+
+  // function updateKnowsToYet(index) {
+  //   let toYet = knows[index];
+  //   yets = [...yets, toYet];
+  //   let knows1 = knows.slice(0, index);
+  //   let knows2 = knows.slice(index + 1);
+  //   knows = [...knows1, ...knows2];
+  // }
 
   let yetBtnStatus = {};
   function yetBtnToggle(index) {
@@ -366,18 +391,10 @@
                 hasMore={update_show_yets.length}
                 threshold={80}
                 on:loadMore={() => {
-                  page++;
+                  show_yet_page++;
                   yets_scroll();
                 }}
               />
-              <!-- <InfiniteScroll
-                hasMore={yets.length > (page + 1) * size}
-                threshold={80}
-                on:loadMore={() => {
-                  page++;
-                  yets_scroll();
-                }}
-              /> -->
             </div>
           {/if}
 
@@ -386,7 +403,7 @@
             <div class="tab3Page px-4">
               <div class="pt-2 mb-4">
                 <div class="grid grid-cols-2 gap-2 text-lg">
-                  {#each knows as know, i (know)}
+                  {#each show_knows as know, i (know)}
                     <div>
                       <div class="block text-left " transition:slide>
                         <div
@@ -433,6 +450,14 @@
                   {/each}
                 </div>
               </div>
+              <InfiniteScroll
+                hasMore={update_show_knows.length}
+                threshold={80}
+                on:loadMore={() => {
+                  show_know_page++;
+                  knows_scroll();
+                }}
+              />
             </div>
           {/if}
         </div>
